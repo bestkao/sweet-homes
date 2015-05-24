@@ -1,0 +1,34 @@
+<?php
+require_once("SweetHomeAutoloader.php");
+?>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <?php
+        //All records will be displayed if no search is selected
+        $houseListPage = new PropertyList();
+
+        //have to use isset() to check if variable  exists
+        if (isset($_POST['searchData']) == true) {
+           $search = $_POST['searchData'];
+           echo "search value = ".$search."</br>";
+           echo "search type = ".$_POST['searchType']."</br>";
+           $constraint = new PropertySearchConstraint('city', 'instr', $search);
+           $houseListPage->setSearchAddConstraint($constraint);
+        } else {
+            echo "No search criteria found.</br>";
+        }
+
+        $houseListPage->display();
+        ?>
+    </body>
+</html>

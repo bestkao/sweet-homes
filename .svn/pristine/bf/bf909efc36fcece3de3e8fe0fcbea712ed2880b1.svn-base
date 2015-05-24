@@ -1,0 +1,24 @@
+<?php
+
+
+
+/**
+ * Description of InputFilter
+ *
+ * @author sashi
+ */
+class InputFilter 
+{
+    public static function filter($userInput)
+    {
+        $databaseConnector = new DatabaseConnector();
+        $db=$databaseConnector->connect();
+        if($db)
+         $userInput = mysqli_real_escape_string($db,$userInput);
+        else $userInput=false;
+        
+        $db->close();
+        
+        return $userInput;
+    }
+}

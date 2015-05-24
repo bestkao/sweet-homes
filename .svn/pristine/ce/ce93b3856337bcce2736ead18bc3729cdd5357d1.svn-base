@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * This is a class Footer responsible for displaying the bottom part of a web page.
+ *
+ * @author sashi
+ */
+class Footer
+{
+    public function __construct()
+    {
+
+    }
+
+    public function display()
+    {
+?>
+        <!-- Begin footer -->
+        <div id="footer">
+          <div class="container">
+              <div class="col-sm-1">
+                  <a href="#privacy">Privacy</a>
+              </div>
+              <div class="col-sm-1 longword">
+                  <a href="#disclaimer">Disclaimer</a>
+              </div>
+              <div class="col-sm-1">
+                  <a href="#info">Link</a>
+              </div>
+              <div class="col-sm-7">
+                  <a href="#info">Info</a>
+              </div>
+              <div class="col-sm-2">
+                  &copy; Sweet Homes 2014
+              </div>
+          </div>
+        </div>
+        <!-- End footer -->
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/dropsearch.js" type="text/javascript"></script>
+<?php
+     }
+}

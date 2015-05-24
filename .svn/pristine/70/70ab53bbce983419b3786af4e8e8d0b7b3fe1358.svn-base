@@ -1,0 +1,10 @@
+
+.footer {
+    position:absolute;
+    top:181%;
+    height: 135px;
+    width: 100%;
+    background-color:windowframe;
+
+
+}

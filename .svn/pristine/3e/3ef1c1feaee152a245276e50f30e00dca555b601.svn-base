@@ -1,0 +1,36 @@
+<?php
+
+
+
+/**
+ * Description of InputFilter
+ *
+ * @author sashi
+ */
+class InputFilter 
+{
+    public static function filter($userInput)
+    {
+        $databaseConnector = new DatabaseConnector();
+        $db=$databaseConnector->connect();
+        if($db)
+         $userInput = mysqli_real_escape_string($db,$userInput);
+        else $userInput=false;
+        
+        $db->close();
+        
+        return $userInput;
+    }
+    
+    public static function validPhoneNumber($phone)
+    {
+        $valid = false;
+        
+        if(preg_match("/^[0-9]{3}(-)[0-9]{3}(-)[0-9]{4}$/", $phone)) {
+            $valid = true;
+        }
+        
+      
+        return $valid;
+    }
+}

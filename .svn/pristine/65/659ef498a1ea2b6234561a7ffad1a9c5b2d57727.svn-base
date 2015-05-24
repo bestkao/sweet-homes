@@ -1,0 +1,164 @@
+<?php
+
+
+
+/**
+ * Description of AccountSetting
+ *
+ * @author sashi
+ */
+class AccountSetting extends Page
+{
+
+     public function __construct() {
+        parent::__construct();
+        ?>
+        <html>
+            <head>
+                <title>Account Settings</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+                <link rel="icon" href="images/favicon.ico">
+                <!-- Custom styles for this template -->
+                <link href="css/Header.css" rel="stylesheet">
+               <link href="css/AccountSetting.css" rel="stylesheet">
+                <link href="css/Footer.css" rel="stylesheet">
+            </head>
+        <?php
+    }
+
+    public function display() {
+        $this->header->display();
+        $this->displayContent();
+        $this->footer->display();
+
+    }
+
+    public function displayContent()
+    {
+        $realtor= Realtor::find($_SESSION['realtor_id']);
+        if($realtor instanceof Realtor){
+        ?>
+                        <br/><br/><br/><br/><br/>
+            <div class="container-fluid navbar navbar-default " role="navigation">
+
+                <!-- second menu bar to allow bread crums-->
+             <ul class="nav navbar-nav list">
+                 <li ><a>Account Settings</a></li>
+
+
+            </ul>
+
+              </div>
+
+              <div class="container-fluid" style="background-color:white">
+                  <div class="row">
+                <div class="jumbotron" style=" top:5%; left: 200px;">
+<form class="form-vertical" action='accountSettings.php' method="POST">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Settings</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  >First Name</label>
+      <div class="controls">
+        <input type="text" id="username" name="firstName"
+               <?php echo 'value="'.$realtor->getFirstName().'"';
+               ?>
+               class="input-xlarge">
+
+      </div>
+    </div>
+     <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  >Last Name</label>
+      <div class="controls">
+        <input type="text" id="username" name="lastName"
+               <?php echo 'value="'.$realtor->getLastName().'"';?>
+               class="input-xlarge">
+
+      </div>
+    </div>
+
+    <div class="control-group">
+      <!-- E-mail -->
+      <label class="control-label" for="email">E-mail</label>
+      <div class="controls">
+        <input type="text" id="email" name="email"
+               <?php echo 'value="'.$realtor->getEmail().'"';?>
+               class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="password">Password</label>
+      <div class="controls">
+        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+       <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" >Mobile Phone</label>
+      <div class="controls">
+        <input type="text" id="pd" name="phoneMobile"
+               <?php echo 'value="'.$realtor->getPhoneMobile().'"';?>
+               class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+          <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" >Office Phone</label>
+      <div class="controls">
+        <input type="text" id="pd" name="phoneOffice"
+               <?php echo 'value="'.$realtor->getPhoneOffice().'"';?>
+               class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+
+      <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" >About</label>
+      <div class="form-group">
+
+            <textarea style="resize: none;" class="form-control" id="message" name="about"
+
+                      rows="4"><?php echo $realtor->getAbout(); ?>
+            </textarea>
+
+
+        <p class="help-block"></p>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <button class="btn btn-success">Edit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+                    </div>
+                  </div>
+                  </div>
+
+                            <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/dropsearch.js" type="text/javascript"></script>   
+
+                
+
+        <?php
+
+        }
+    }
+
+}

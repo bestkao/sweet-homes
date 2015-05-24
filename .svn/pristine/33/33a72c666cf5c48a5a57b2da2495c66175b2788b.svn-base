@@ -1,0 +1,278 @@
+<?php
+
+/**
+ * Description of MemberProfile
+ *
+ * @author sashi
+ */
+class MemberProfile extends Page 
+{
+
+    public function __construct() 
+    {
+        parent::__construct();
+        ?>
+        <html>
+            <head>
+                <title>Properties</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+                <link rel="icon" href="images/favicon.ico">
+                <!-- Custom styles for this template -->
+                <link href="css/Header.css" rel="stylesheet">
+                <link href="css/MemberProfile.css" rel="stylesheet">
+                <link href="css/Footer.css" rel="stylesheet">
+            </head>
+        <?php
+    }
+
+    public function display() {
+        $this->header->display();
+        $this->displayContent();
+        
+        $this->dropDownScript();
+    }
+
+    public function displayContent() {
+        ?>
+            <br/><br/><br/><br/><br/>
+            <div class="container-fluid navbar navbar-default " role="navigation">
+
+                <!-- second menu bar to allow bread crums-->
+                <ul class="nav navbar-nav list">   
+                    <li ><a id="listing" href="memberProfile.php" >
+                            Profile</a></li> 
+
+      
+                </ul>
+                 <br/><br/>
+    
+
+            </div>
+            
+            <?php
+                $this->displaySearch();
+                if(isset($_GET['content'])){
+                    
+                    if(strcmp($_GET['content'], "add_preference")==0){
+                        $this->addPreferenceForm();
+                    }
+                    else if(strcmp($_GET['content'], "preference_added")==0){
+                        $this->displayFlashMessage("<p>Your Preference has been "
+                                . "successfully added!</p>"
+                                . "<p>We will notify you as soon as we get"
+                                . " your choice of House.</p>");
+                    }
+                }else $this->displayPreference();
+             ?>
+            
+            
+
+            
+            
+        
+        <?php
+    }
+    
+    private function displaySearch()
+    {?>
+    
+            <div class="jumbotron">
+                <div class="container">
+
+                    <div class="searchbar1 simple-search" >
+
+
+                        <form class="search" action="propertyList.php" method="post" >
+
+                            <input class="form-control SearchBox" name="searchData" value = "" placeholder="Search City, Neighborhood, Zip">
+
+                            <button class="btn btn-primary ButtonSearch " type="submit">Search</button>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>    
+        
+        
+    <?php
+       
+    }
+    
+    
+    public function displayPreference()
+    {
+        
+        ?>
+            <div class="container" style="background-color: darkseagreen;">     
+                <h3 style="text-align: center;">Your Prefered Properties</h3>
+        <?php
+        $where= "member_id =".$_SESSION['user_id'];
+        $propertiesPreference = PropertyPreference::getBySearch($where);
+        if(is_null($propertiesPreference)){
+            echo '<p style="text-align: center;">You have not set any Property Preference yet.</p>';
+            echo '<p style="text-align: center;">So, Please set your Property Preference to get desired results</p>';
+        }
+        else{
+            $this->displayPreferedProperties($propertiesPreference);
+        }
+        ?>
+                <div class="buttons" align="center" >
+                    <a class="btn btn-primary" role="button" 
+                       href="memberProfile.php?content=add_preference">
+                    Add Preference</a> 
+                    
+           </div>
+        </div>
+    <?php
+    }
+    
+    public function addPreferenceForm()
+    {
+    ?>
+        <div class="jumbotron" style=" top:5%; left: 200px;"> 
+            <form class="form-vertical" 
+            <?php echo "action='addPreference.php'";
+            ?>
+                      method="POST">
+                    <fieldset>
+                        <div id="legend">
+                            <legend class="">Add Property Preference</legend>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Price</label>
+                            <div class="controls">
+                                <input type="text"  name="price" 
+                                       class="input-xlarge">
+
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Zip</label>
+                            <div class="controls">
+                                <input type="text"  name="zip" 
+                                       class="input-xlarge">
+
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <!-- E-mail -->
+                            <label class="control-label" >Neighborhood</label>
+                            <div class="controls">
+                                <input type="text"  name="neighborhood" 
+        
+                                       class="input-xlarge">
+                                <p class="help-block"></p>
+                            </div>
+                            
+                        <div class="control-group">
+                            <label class="control-label" >Number of Bedrooms:</label>
+                            <select name ="bedrooms">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                            
+                        <div class="control-group">
+                            <label class="control-label" >Number of Bathrooms:</label>
+                            <select name ="bathrooms">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                        </div>
+                                                   
+           
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >City:</label>
+                                  <select name ="city">
+                                        <option value="Alameda">Alameda</option>
+                                        <option value="Albany">Albany</option>
+                                        <option value="Antioch">Antioch</option>
+                                        <option value="Atherton">Atherton</option>
+                                        <option value="Belmont">Belmont</option>
+                                        <option value="Belvedere">Belvedere</option>
+                                        <option value="Benicia">Benicia</option>
+                                        <option value="Berkeley">Berkeley</option> 
+                                         <option value="Brentwood">Brentwood</option>
+           
+                                        <option value="San Francisco">San Francisco</option>
+                                        <option value="San Mateo">San Mateo</option>
+
+                                    </select>
+
+                        </div>                       
+                        
+                        <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                                <button class="btn btn-success">Add</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                
+                    </div>
+            
+            
+     <?php       
+        
+        
+    }
+    
+    private function displayFlashMessage($message) 
+    {?>
+    <div class="container" style="background-color: #28a4c9;">     
+        <h3 style="text-align: center;">
+            <?php echo $message;?>
+        </h3>
+                
+    </div>
+    
+        
+    <?php
+        
+    }
+    
+    
+    private function displayPreferedProperties($preferences)
+    {
+       foreach ($preferences as &$preference) {
+       $clause= $this->getPreferenceClause($preference);
+               
+       }
+    ?>
+     <div id="wrapper">
+     <iframe id ="frame" src="http://sfsuswe.com/~f14g01/propertyListing.php" src="any.html">
+     </iframe>
+     </div>
+     <br/><br/>
+    <!--<div> 
+    <object type="text/html" data="http://sfsuswe.com/~f14g01/propertyListing.php"  style="border:5px ridge blue">
+    </object></div>-->
+    <?php
+    }
+    
+    private function getPreferenceClause($preference)
+    {
+        $whereClause="city='".$preference->getCity()."'";
+        $whereClause=", zip='".$preference->getZip()."'";
+        
+        $properties= Property::getBySearch($whereClause);
+    }
+}

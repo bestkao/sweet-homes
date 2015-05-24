@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Nov 18, 2014, 11:27:33 AM
+    Author     : sashi
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+.navibar {
+    position: absolute;
+    background-color: #00bf8f;
+    border-bottom-color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+.navbar-brand {
+    margin: 0 auto;
+    vertical-align: middle;
+}
+.navbar-brand img {
+    height: 30px;
+    margin-top: -5px;
+}
+
+.navibar .navlist .list a, .navibar .navlist .logList a {
+    color: #fff;
+    font-size: 18px;
+}
+
+.navibar .navlist .list a:hover, .navibar .navlist .logList a:hover, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #fff;
+    color: #00bf8f;
+}
+
+/*.navibar .navlist .logList {
+    padding-right: 12%;
+}*/
+
+.navibar .navlist .logList .dropdown .dropdown-menu, .navbar-default .navbar-toggle :hover {
+    background-color: #00bf8f;
+    border-color: white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+#classProject {
+    /*margin: 0 auto;*/
+    /*text-align: center;*/
+    /*margin-left: 33%;*/
+    /*position: absolute;*/
+    /*width: 240px;*/
+    color: #7B3F00;
+    padding-right: 30px;
+}
+
+@media(max-width: 768px) {
+    #classProject {
+        visibility: hidden;
+    }
+    .navbar-brand {
+        position: absolute;
+        /*width: 100%; // breaks collapse menu*/
+        margin: 0 auto;
+        text-align: center;
+    }
+}

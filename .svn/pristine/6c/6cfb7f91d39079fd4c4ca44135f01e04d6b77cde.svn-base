@@ -1,0 +1,255 @@
+
+<?php
+
+
+class PropertyDetails extends Page
+{
+    private $property;
+    
+   public function __construct($pid)
+    {
+       
+        $this->property=Property::find($pid);
+        
+    }
+    
+    public function display()
+    {
+        session_start();
+       ?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Buy</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+
+
+        <!-- Custom styles for this template -->
+        <link href="css/PropertyDetails.css" rel="stylesheet">
+    </head>
+
+
+    <!-- NAVBAR  -->
+
+    <body>
+
+
+
+        <!-- Navigation Bar -->
+        <div class="container-fluid navbar navbar-default navbar-fixed-top navibar">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div> 
+
+
+
+
+            <div class="collapse navbar-collapse navlist" id="myNavbar">
+                <ul class="nav navbar-nav list">
+                    <li><a href="index.php">HOME</a></li>
+                    <li><a href="propertyList.php">BUY</a></li>
+                    <li><a href="sell.php">SELL</a></li>
+                    <li><a href="realtors.php">REALTORS</a></li>
+                    <li><a href="about.php">ABOUT</a></li>
+                    <li><a href="contact.php">CONTACT</a></li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right logList">
+
+
+
+
+
+
+                    <li class ="dropdown">
+                        <a href ="#" class = "dropdown-toggle" data-toggle = "dropdown">Name<b class = "caret"></b></a>
+                        <ul class ="dropdown-menu">
+                            <li><a href ="#">Name</a></li>
+                            <li><a href ="http://localhost:8383/SweetHomeLatest/MemberLogIn.html">LogOut</a></li>
+                            <li><a href ="http://localhost:8383/SweetHomeLatest/AdminLogIn.html#">Wish List</a></li>
+                            <li><a href ="#">Account Settings</a></li>
+                            <li><a href ="#">Load Save Search</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+        </div>
+
+      <?php
+       if(!is_null($this->property) && $this->property instanceof Property)
+       {
+      ?>
+
+        <div class="body">
+            <div class="description">
+                <h2>Detailed Description of Property</h2>
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-xs-4 col-md-4">
+                            <a href="#" class="thumbnail thumb">
+                                <?php
+                                      
+                                        
+                                       
+                                echo '<img class="image1" src="' . $this->property->getThumbnailFileName() . '" >';
+                                ?>
+                            </a>
+                        </div>
+
+                        <div class="col-xs-4 col-md-6">
+                            <div class="form-message messge1" >
+                                
+                                    <?php
+                                   // echo "<p>".$this->index." </p>";
+                                    echo "<p><strong>" . ". id: ";
+                                    echo $this->property->getID();
+                                    echo "</strong><br />descriptionLong: ";
+                                    echo $this->property->getLongDescription();
+                                    echo "</p>";
+                                     
+                                     //session_destroy();
+                                    ?>    
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="navlink">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info btn1">Pic</button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info btn2">Pic</button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info btn3">Pic</button>
+                    </div>      
+
+                    <div class="col-md-2">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="map">
+                <div class="container">        
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <div class="form-message messge2" >
+                                <textarea class="form-textarea  text2"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-4 col-md-8">
+
+                            <div class="container newtable">
+
+                                <div class="table-responsive">         
+                                    <table class="table">
+                                        <tbody>
+
+
+                                            <tr>
+
+
+                                                <td style="border-color: white">
+
+                                                    <!-- <form method="get" action="Realtors.html"> -->
+
+
+                                                    <button type="submit" class="btn btn-primary btn1">Contact Realtor</button>
+
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+
+
+                                                <td style="border-color: white">
+
+                                                    <form method="get" action="SignUp.html">
+
+
+                                                        <button type="submit" class="btn btn-primary btn1">Add to Wishlist</button>
+                                                    </form>
+                                                </td>
+
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>   
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+       <?php }?>
+
+
+
+        <div class="footer">
+
+
+            <a class="Privacy" href="#"><font color="white">Privacy </font></a>
+            <a class="Disclaimer" href="#"> <font color="white">Disclaimer</font></a>
+
+            <a class="Link" href="#"><font color="white">Link </font></a>
+            <a class="Info" href="#"> <font color="white">Info</font></a>
+
+
+        </div>
+
+
+
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+
+    </body>
+</html>
+
+<?php
+        
+    }
+
+}

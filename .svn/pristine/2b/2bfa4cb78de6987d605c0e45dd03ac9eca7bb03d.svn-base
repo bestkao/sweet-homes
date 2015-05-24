@@ -1,0 +1,22 @@
+.form-horizontal-heading {
+    padding-left:33px;
+    color:black;
+
+}
+
+.panel-default{
+    width: 90%;
+    height: 40%;
+    position: relative;
+    margin-left: 4%;
+}
+
+.delbutton{
+    margin-left: 80%;
+    margin-bottom: 15px;
+}
+
+.backbutton{
+    margin-left: 20px;
+    margin-bottom: 15px;
+}

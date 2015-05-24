@@ -1,0 +1,14 @@
+
+#sell {
+    font-style: oblique;
+    font-weight: bolder;
+    background-color: #fff;
+    color: #00bf8f;
+}
+
+
+.Sell .jumbotron{
+    position: absolute;
+    top:20%;
+
+}

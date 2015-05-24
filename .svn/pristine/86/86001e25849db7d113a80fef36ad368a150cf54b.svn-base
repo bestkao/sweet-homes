@@ -1,0 +1,72 @@
+<?php
+    require_once("SweetHomeAutoloader.php");
+    
+    $addData=0;
+    $address=null;
+    $addressUnit=null;
+    $city = null;
+    $state = null;
+    $zip=null;
+    $shortDescription=null;
+    $longDescription=null;
+    
+    if(isset($_POST['address'])==true && empty($_POST['address'])==false)
+    {
+        $address = $_POST['address'];
+        $addData++;
+    }
+    if(isset($_POST['addressUnit'])==true && empty($_POST['addressUnit'])==false)
+    {
+        $addressUnit = $_POST['addressUnit'];
+        $addData++;
+    }
+    if(isset($_POST['city'])==true && empty($_POST['city'])==false)
+    {
+        $city = $_POST['city'];
+        $addData++;
+    }
+    if(isset($_POST['state'])==true && empty($_POST['state'])==false)
+    {
+        $state = $_POST['state'];
+        $addData++;
+    }
+    if(isset($_POST['zip'])==true && empty($_POST['zip'])==false)
+    {
+        $zip = $_POST['zip'];
+        $addData++;
+    }
+    if(isset($_POST['descriptionShort'])==true && empty($_POST['descriptionShort'])==false )
+    {
+        $shortDescription = $_POST['shortDescription'];
+        $addData++;
+    }
+    if(isset($_POST['descriptionLong'])==true && empty($_POST['descriptionLong'])==false)
+    {
+        $longDescription = $_POST['descriptionLong'];
+        $addData++;
+    }
+    
+    //echo "AddData=".$addData."<br/>";
+    if($addData==7)
+    {
+        //include_once 'models/ModelDatabase.php';
+        //include_once 'models/PropertyAdder.php';
+        //include_once 'models/PropertyRemover.php';
+        //include_once 'models/PropertyEditor.php';
+        //include_once 'models/PropertyGetter.php';
+        
+        $propertyModel = new ModelDatabase(new PropertyAdder("Property"), 
+                new PropertyRemover("Property"), new PropertyEditor("Property"), 
+                new PropertyGetter("Property"));
+        $propertyModel->add($_POST);
+    
+        header("Location: propertyList.php");
+    }
+    else
+    {
+        //include_once 'views/MasterPage.php';
+  
+        $masterPage = new MasterPage() ;
+        $masterPage->display();
+    }
+?>

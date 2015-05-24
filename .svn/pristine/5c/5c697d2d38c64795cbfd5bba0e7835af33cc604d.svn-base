@@ -1,0 +1,315 @@
+<?php
+
+//include 'Model.php';
+
+/**
+ * This Model class represents a Member (website user who has login capabilities)
+ * This class has the columns of the Member table staticly mapped as attributes.
+ * So, if any number of columns are added or edited in the Member table in the Database
+ * then attributes in this class has to be added/modified manually.  Also update
+ * functions buildDataArray() and setAll().
+ *
+ * A new Member can be instantiated and attributes can be set using the setters.
+ * Then the new Member is saved to the database using the save() function.
+ * 
+ * And an existing member can be retrieved using the class method find($uniqueID)
+ * Similarly, existing Member is saved to the database after editing by using
+ * the save() function.
+ * 
+ * getAll() and getBySearch($whereClause) allow additional retrieval methods.  
+ * getAll() gets all members and getBySearch() allows retrieval by sql logic - 
+ * $whereClause must use sql syntax.
+ * 
+ * @author sashi/justina
+ */
+class Member implements Model
+{
+    /*Be sure when adding attributes to also add them in functions
+     * buildDataArray() and setAll()
+     * 
+     */
+
+    private $id;
+    private $google = 0;
+    private $password;
+    private $email;
+    private $firstName;
+    private $lastName;
+    private $phone;
+    private $wishlist;
+    private $enabled = 1;
+    
+    private $wishlistArray = array();
+    private static $memberDatabase;
+    private $isNew;
+    
+    //TO DO - wishlist management, whether array (comma delim list in table) or 
+    //own table
+
+    public function __construct($isNew)
+    {
+        $this->isNew = $isNew;
+        self::initMemberDatabase();
+        //$this->wishlist = new WishList();   jtc-wishlist table?
+    }
+
+    public function getID()
+    {
+        return $this->id;
+    }
+
+    public function getGoogle()
+    {
+        return $this->google;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getFullName()
+    {
+        $full = $this->firstName . " " . $this->lastName;
+        return $full;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    public function getWishlist()
+    {
+        return $this->wishlist;
+    }
+
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /*jtc-wishlist table?
+    public function getAllWish()
+    {
+        $propertiesInWishlist = array();
+        $wishes = $this->wishlist->getAll();
+
+        for ($i = 0; $i < count($wishes); $i++) {
+            $propertiesInWishlist[$i] = Property::find($wishes[$i]);
+        }
+        return $propertiesInWishlist;
+    }
+     * 
+     */
+
+    public function setID($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setGoogle($google)
+    {
+        $this->google = $google;
+    }
+
+    public function setPassword($pswd)
+    {
+        $this->password = $pswd;
+    }
+
+    public function setEmail($eml)
+    {
+        $this->email = $eml;
+    }
+
+    public function setFirstName($frst)
+    {
+        $this->firstName = $frst;
+    }
+
+    public function setLastName($lst)
+    {
+        $this->lastName = $lst;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    public function setWishlist($wlist)
+    {
+        $this->wishlist = $wlist;
+    }
+
+    public function setEnabled($en)
+    {
+        $this->enabled = $en;
+    }
+
+    /*jtc-wishlist table?
+    public function setWishlist($wlistID)
+    {
+        $this->wishlist->setID($wlistID);
+    }
+
+    public function addWishToWishlist($pID)
+    {
+        $this->wishlist->addWish($prID);
+    }
+     * 
+     */
+
+    /**
+     * Save this object to the Database
+     */
+    public function save()
+    {
+        if ($this->isNew) {
+            $data = $this->buildDataArray();
+            self::$memberDatabase->add($data);
+            $this->isNew = false;
+        } else {
+            $data = $this->buildDataArray();
+            self::$memberDatabase->edit($data);
+        }
+    }
+
+    public function remove()
+    {
+        self::$memberDatabase->remove($this->id);
+    }
+
+    /**
+     * Returns a Member object with the given ID if found in the Database
+     * Or else returns false
+     */
+    public static function find($uniqueID)
+    {
+        //extract the row with given ID from Database
+        //if found create an Member object with the retrieved attributes
+        //then set the isNew of that object to false
+        //return the object
+        $member = null;
+        $whereClause = "id=" . $uniqueID;
+        $data = self::$memberDatabase->getBySearch($whereClause);
+        if (count($data) != 0) {
+            $member = new Member(false);
+            $member->setAll($data);
+            //$member->setIsNew(false);
+        }
+        return $member;
+    }
+
+    /**
+     * Returns an array of all the available Member objects from the Database
+     * Or if there are no available records then returns null.
+     */
+    public static function getAll()
+    {
+        self::initMemberDatabase();
+        $members = null;
+
+        $list = self::$memberDatabase->get();
+        $num_results = $list->num_rows;
+
+        if ($num_results > 0) {
+            $members = array($num_results);
+
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $list->fetch_assoc();
+
+                $members[$i] = new Member(false);
+                $members[$i]->setAll($row);
+            }
+        }
+        return $members;        
+    }
+
+    /**
+     * 
+     * @param type $whereClause is the search criteria by which matchin members will
+     *  be selected
+     * @return array of Member objects matching the search keyu if found 
+     * or else null
+     */
+    public static function getBySearch($whereClause)
+    {
+        self::initMemberDatabase();
+        $members = null;
+
+        $list = self::$memberDatabase->getBySearch($whereClause);
+        $num_results = $list->num_rows;
+
+        if ($num_results > 0) {
+            $members = array($num_results);
+
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $list->fetch_assoc();
+
+                $members[$i] = new Member(false);
+                $members[$i]->setAll($row);
+            }
+        }
+
+        return $members;
+    }
+
+    public function buildDataArray()
+    {
+        $data = array(
+            "id" => $this->id,
+            "google" => $this->google,
+            "password" => $this->password,
+            "email" => $this->email,
+            "firstName" => $this->firstName,
+            "lastName" => $this->lastName,
+            "phone" => $this->phone,
+            "wishlist" => $this->wishlist,
+            "enabled" => $this->enabled,
+        );
+        return $data;
+    }
+
+    public function setAll(array $data)
+    {
+        $this->setID($data['id']);
+        $this->setGoogle($data['google']);
+        $this->setPassword($data['password']);
+        $this->setEmail($data['email']);
+        $this->setFirstName($data['firstName']);
+        $this->setLastName($data['lastName']);
+        $this->setPhone($data['phone']);
+        $this->setWishlist($data['wishlist']);
+        $this->setEnabled($data['enabled']);
+    }
+
+    private static function initMemberDatabase()
+    {
+        if (is_null(self::$memberDatabase)) {
+            self::$memberDatabase = new ModelDatabase(
+                    new MemberAdder("Member"), 
+                    new MemberRemover("Member"),
+                    new MemberEditor("Member"), 
+                    new MemberGetter("Member")
+            );
+        }
+    }
+
+}

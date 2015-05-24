@@ -1,0 +1,129 @@
+.nav-tabs {
+    border-bottom: 2px solid #ddd;
+    font-size: 20px;
+
+}
+
+.nav-tabs li{
+    position: relative;
+    width: 33.333%;
+
+}
+
+.newtable {
+    position: relative;
+    top: 10px;
+    padding-left: 2%;
+}
+
+.tab-content .active .firstbutton{
+    margin-top: 20px;
+    margin-left: 65px;
+    padding-left:20px;
+}
+
+.tab-content .active a{
+    padding-left:65px;
+}
+
+.tab-content .active .newtable .table >tbody .check1{
+    width: 20px;
+
+}
+
+.tab-content .active .newtable .table >tbody .checkbox1{
+    margin-left: 50%; 
+
+}
+
+.tab-content .active .newtable .table >tbody .realtorlist{
+
+    height: 57px;
+    width: 350px;
+
+}
+
+.tab-content .active .newtable .table >tbody .txt1{
+
+    height: 57px;
+    width: 300px;
+
+}
+
+.tab-content .active .newtable .table >tbody .btn1{
+    width: 8%;
+
+}
+
+.tab-content .active .newtable .table >tbody .secondbutton{
+    position: relative;
+    margin-left: -300%;
+
+}
+
+.tab-content .active .newtable .table >tbody .btn2{
+    width: 8%;
+
+}
+
+.tab-content .active .newtable .table >tbody .thirdbutton{
+    position: relative;
+    margin-left: -200%;
+    margin-bottom: 2%;
+
+}
+
+
+.tab-content .active .newtable .fourthbutton{
+    position: relative;
+    margin-left: 80%;
+    margin-bottom: 15px;
+
+}
+
+.tab-content .newtable .table >tbody .check2{
+    width: 20px;
+
+}
+
+.tab-content .newtable .table >tbody .checkbox2{
+    margin-left: 30px;
+
+}
+
+.tab-content .newtable .table >tbody .btn3{
+    width: 8%;
+
+}
+
+.tab-content .active .newtable .table >tbody .memberlist{
+
+    height: 57px;
+    width: 350px;
+
+}
+
+
+.tab-content .newtable .table >tbody .check3{
+    width: 20px;
+
+}
+
+.tab-content .newtable .table >tbody .checkbox3{
+    margin-left: 30px;
+
+}
+
+.tab-content .newtable .table >tbody .but1{
+    position: relative;
+    margin-left: -200%;
+    margin-bottom: 2%;
+
+}
+
+.tab-content .active .newtable .table >tbody .proplist{
+
+    height: 57px;
+    width: 350px;
+
+}

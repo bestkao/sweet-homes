@@ -1,0 +1,221 @@
+
+.searchbox {
+    position: absolute;
+    top:33%;
+}
+
+
+.searchbox .container .simple-search {
+    position:absolute;
+    top: 147%;
+    left: 57%;
+    width:100%;
+    //margin-left: -354px;
+    margin-left: -98.5%;
+    max-width: 100%;
+    background: 0;
+    border: 0;
+    margin-top: -153px;
+   
+    
+   
+    
+}
+.searchbox .container .searchbar1 .search-label {
+    position:absolute;
+    top:93%;
+    z-index:3;
+    max-width: none;
+    width:100%;
+
+
+}
+
+.searchbox .container .searchbar1 .search-label .SearchBox {
+    position:absolute;
+    top:93%;
+    
+
+}
+
+.searchbox .container .searchbar1 .ButtonSearch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color:brown;
+   
+    margin: 0;
+    width:10%;
+    height:43px;
+
+
+
+}
+
+.searchbox .container .searchbar1 .SearchBox {
+    height: 43px;
+    width: 30%;
+    margin-left: 60%;
+    font-size: 18px;
+    text-align:left;
+    font:bold;
+
+}
+
+.searchbox .container .tap {
+ 
+    margin-left: -37%;
+   position: absolute;
+   top:23%;
+   margin-top:-153px;
+  
+}
+
+
+  
+      .searchbox .container .tap .container .row .neitn {
+
+
+ margin-left: 40%;
+ z-index: 3;
+ 
+
+ 
+  
+  
+   }
+   
+ .searchbox .container .tap .container .row .neitn .dropButt {
+     
+     height: 43px;
+      width: 154px;
+   font-size: 18px;
+    
+   
+ }
+
+
+
+
+
+
+.caroText {
+    
+    position: absolute;
+    top:28%;
+    text-align: center;
+    margin-left: 30%;
+}
+
+.caroText h1 {
+    font-size: 43px;
+}
+
+
+
+
+.HotProperty {
+    position:absolute;
+    top:58%;
+   
+}
+
+.HotProperty h1 {
+    color: red;
+    margin-left: 36%;
+}
+.HotProperty .row .text .text1 {
+    width:100%;
+    background-color:whitesmoke;
+    height: 93px;
+    font-size: 21px;
+    text-align: center;
+    color:black;
+}
+.footer {
+    position:absolute;
+    top:181%;
+    height: 135px;
+    width: 100%;
+    background-color:windowframe;
+
+
+}
+
+/*This will work for firefox*/
+@-moz-document url-prefix() {
+
+#classProject {
+
+    color:green;
+    position: absolute;
+    top:16%;
+   
+
+}
+
+.carousel {
+    position: absolute;
+    top:24%;
+}
+
+.carousel .carousel-inner .item  img {
+    
+    height: 4%;
+    
+}
+
+.footer {
+    position:absolute;
+    top:242%;
+    
+
+
+}
+
+ }
+ 
+
+   @media (max-width:950px ) 
+{
+    
+     .navibar .navbar-header .navbar-brand {
+ 
+    font-size: 13px;
+   
+
+}
+
+
+
+
+
+.navibar .navlist .list a {
+
+    font-size: 13px;
+   
+
+
+}
+
+.navibar .navlist .logList a {
+
+    font-size: 13px;
+
+
+} 
+    
+
+   .jumbotron .container .tap .container .row .addbtn  {
+
+padding-right: 3px;
+   }  
+   
+    .footer {
+    position:absolute;
+    top:84%;
+    
+
+
+}
+}

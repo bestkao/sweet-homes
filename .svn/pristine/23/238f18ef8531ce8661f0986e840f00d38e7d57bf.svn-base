@@ -1,0 +1,7 @@
+<?php
+    require_once("SweetHomeAutoloader.php");
+
+    $sellPage = new Sell();
+    $sellPage->display();
+
+?>

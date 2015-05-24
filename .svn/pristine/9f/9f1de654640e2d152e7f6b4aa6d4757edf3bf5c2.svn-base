@@ -1,0 +1,298 @@
+
+
+.jumbotron .container .simple-search {
+    position:absolute;
+    top: 163%;
+    left: 57%;
+    width:100%;
+    //margin-left: -354px;
+    margin-left: -108.5%;
+    max-width: 100%;
+    background: 0;
+    border: 0;
+    margin-top: -150px;
+
+
+
+}
+.jumbotron .container .searchbar1 .search-label {
+    position:absolute;
+    top:93%;
+    z-index:3;
+    max-width: none;
+    width:100%;
+
+
+}
+
+.jumbotron .container .searchbar1 .search-label .SearchBox {
+    position:absolute;
+    top:93%;
+
+
+}
+
+.jumbotron .container .searchbar1 .ButtonSearch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color:brown;
+
+    margin: 0;
+    width:10%;
+    height:43px;
+
+
+
+}
+
+.jumbotron .container .searchbar1 .SearchBox {
+    height: 43px;
+    width: 30%;
+    margin-left: 64%;
+    font-size: 18px;
+    text-align:left;
+    font:bold;
+
+}
+
+.jumbotron .container .tap {
+
+    margin-left: -95%;
+    position: absolute;
+    top:29%;
+}
+
+
+
+
+      .jumbotron .container .tap .container .row .neitn {
+
+
+ margin-left: 40%;
+ z-index: 3;
+
+
+
+
+
+   }
+
+ .jumbotron .container .tap .container .row .neitn .dropButt {
+
+     height: 43px;
+      width: 154px;
+   font-size: 18px;
+
+
+ }
+
+  .jumbotron {
+    padding: 4em 39.6em;
+
+    z-index:3;
+    position: absolute;
+    top:9%;
+    padding-left: 50%;
+    background-color:lightgray;
+    width: 34px;
+   margin-left:5%;
+
+   color:darkkhaki;
+   opacity: 0.9;
+
+}
+
+
+
+
+.jumbotron .container2 .searchdropdownbar {
+
+    margin-left: -5%;
+    position: absolute;
+    top:29%;
+    width: 50%;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills {
+
+    width: 400px;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills .dropdown1 {
+
+    height: 43px;
+    width: 79px;
+    font-size: 17px;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills .dropdown2 {
+
+    height: 43px;
+    width: 160px;
+    font-size: 17px;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills .dropdown3 {
+
+    height: 43px;
+    width: 153.7px;
+    font-size: 17px;
+}
+
+
+
+
+.jumbotron .container2 .searchdropdownbar .nav-pills .options {
+
+width: 600px;
+height: 43px;
+}
+.jumbotron .container2 .searchdropdownbar  .options morebutton {
+
+width: 600px;
+font-size: 19px;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills .dropdown4 {
+
+    height: 35px;
+    width: 144px;
+    font-size: 15px;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills .dropdown5 {
+
+    height: 35px;
+    width: 122px;
+    font-size: 15px;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills .dropdown6 {
+
+    height: 35px;
+    width: 130px;
+    font-size: 15px;
+}
+
+.jumbotron .container2 .searchdropdownbar .nav-pills a.btn-close {
+
+    margin-left: 60px;
+}
+
+
+#modal {
+    display: none;
+    width: 400px;
+    height: 68px;
+    border:1px solid #CCC;
+    background:white;
+margin-left: 90px;
+
+}
+
+#modal:target {
+    display: block;
+    background:white;
+    font:black;
+    font-size: 18px;
+}
+
+#close {
+    display: none;
+}
+
+
+
+
+#buy {
+    font-style: oblique;
+    font-weight: bolder;
+    background-color: #fff;
+    color: #00bf8f;
+}
+
+
+
+
+/**** BASE ****/
+body {
+    color: #888;
+}
+a {
+    color: #03a1d1;
+    text-decoration: none!important;
+}
+
+/**** LAYOUT ****/
+.list-inline>li {
+    padding: 0 10px 0 0;
+}
+.container-pad {
+    padding: 30px 15px;
+}
+
+
+/**** MODULE ****/
+.bgc-fff {
+    background-color: #fff!important;
+   // height: 250px;
+
+}
+.box-shad {
+    -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+}
+.brdr {
+    border: 1px solid #ededed;
+}
+
+/* Font changes */
+.fnt-smaller {
+    font-size: 1.4em;
+}
+.fnt-lighter {
+    color: #000;
+}
+
+/* Padding - Margins */
+.pad-10 {
+    padding: 10px!important;
+}
+.mrg-0 {
+    margin: 0!important;
+}
+.btm-mrg-10 {
+    margin-bottom: 10px!important;
+}
+.btm-mrg-20 {
+   // margin-bottom: 20px!important;
+}
+
+/* Color  */
+.clr-535353 {
+    color: #535353;
+}
+
+
+
+
+/**** MEDIA QUERIES ****/
+@media only screen and (max-width: 991px) {
+    #property-listings .property-listing {
+        padding: 5px!important;
+    }
+    #property-listings .property-listing a {
+        margin: 0;
+    }
+    #property-listings .property-listing .media-body {
+        padding: 10px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #property-listings .property-listing img {
+        max-width: 180px;
+    }
+    }
+//brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing

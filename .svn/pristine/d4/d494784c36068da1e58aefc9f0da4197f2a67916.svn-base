@@ -1,0 +1,6 @@
+<?php
+require_once("SweetHomeAutoloader.php");
+
+$realtorsPage = new Realtors();
+$realtorsPage->display();
+

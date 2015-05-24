@@ -1,0 +1,232 @@
+#buy {
+         font-style: oblique;
+    font-weight: bolder;
+    color: whitesmoke;
+}
+
+
+.description {
+    position: absolute;
+    top:20%;
+    padding-left: 5%;
+}
+
+.description h2 {
+    padding-left:2%;
+}
+.description .container .row .lef .lab1 {
+    width:100%;
+    height: 75%;
+
+}
+
+
+
+.ContactUs {
+    position:absolute;
+    top:42%;
+    max-height: 434px;
+    padding-left:8%;
+}
+
+
+
+.ContactUs .form-horizontal-main .form-group .Searchoptions {
+   padding-left: 1.5%;
+}
+
+.ContactUs .form-horizontal-main .form-group .Searchoptions  .save2 {
+
+}
+
+.ContactUs .form-horizontal-main .form-group .Savesearch {
+   padding-left: 1.5%;
+   position: relative;
+   top:2px;
+}
+
+
+.ContactUs .form-horizontal-main .form-group .Searchoptions .lab1 {
+    width: 73%;
+    height: 34px;
+
+}
+
+
+
+/*
+
+.RealtorListing {
+    position:absolute;
+    top:73%;
+    padding-left: 13%;
+}
+
+.RealtorListing .row .realtorpic1 .img {
+    width: 73%;
+    height: 65px;
+}
+
+.RealtorListing .row .realtortext1 .textarea1 {
+    width: 100%;
+    height: 65px;
+}
+
+.RealtorListing .row .realtortext1 .but1 {
+    position: relative;
+    top:13px;
+
+
+}
+
+.RealtorListing .row .realtortext1 .rev1 {
+    float:right;
+
+}
+
+.RealtorListing .row .realtortext1 .cont1 {
+    float:right;
+    margin-left: 13px;
+
+}
+
+
+.RealtorListing h2 {
+    padding-left: 30%;
+}
+
+.RealtorListing .row .realtorpic1 .rate1 {
+    padding-left: 32%;
+}
+
+
+
+*/
+
+
+
+.HotProperty {
+    position: absolute;
+    top:47%;
+    padding-left: 6%;
+}
+
+
+.HotProperty .row .text1 {
+    width:100%;
+    background-color:whitesmoke;
+    height: 23%;
+}
+
+.HotProperty .row img {
+    height: 114px;
+    width:100%
+
+}
+
+.HotProperty .row a {
+    border-color:black;
+}
+
+
+
+
+@media(max-width:768px) {
+
+
+
+
+.ContactUs .form-horizontal h2 {
+        font-size: 21px;
+        padding-left: 0px;
+
+    }
+
+
+
+    .ContactUs {
+    position: relative;
+    top:13px;
+    padding-left:35px;
+}
+    .ContactUs .form-horizontal-main .form-group .form-control {
+        width: 76%;
+    }
+
+
+    .ContactUs .form-horizontal-main .form-group .col-sm-7 {
+        width:72%;
+
+    }
+    .ContactUs .form-horizontal-main .form-group .col-sm-7 .lab1 {
+    width: 65%;
+    height: 34px;
+}
+
+     .ContactUs .form-horizontal-main .form-group .col-sm-7 .save2 {
+        width:162px;
+
+    }
+
+
+    .ContactUs .form-horizontal-main .form-group .col-sm-2 {
+        position: relative;
+        top:4px;
+
+
+    }
+
+    .ContactUs .form-horizontal-main .form-group .form-savesearch .save1 {
+        width:93px;
+        position: relative;
+        top:1px;
+
+
+
+    }
+
+    .newtable {
+        position: relative;
+        top:37px;
+        padding-left: 12px;
+    }
+
+
+
+
+
+.newtable .table >tbody .im1 {
+    height: 125px;
+    width: 225px;
+}
+
+.newtable .table >tbody .txt1 {
+    height: 128px;
+    width: 425px;
+}
+
+
+.newtable .table >tbody .image1 {
+    height: 100%;
+    width: 100%;
+}
+
+.newtable .table >tbody .textarea1 {
+    height: 100%;
+    width: 100%;
+
+
+}
+
+.newtable .table >tbody .secondbutton {
+  position: relative;
+  top:33px;
+  padding-right: 32px;
+}
+
+
+
+
+
+
+}

@@ -1,0 +1,139 @@
+<?php
+require_once("SweetHomeAutoloader.php");
+
+session_start();
+
+if (isset($_SESSION['realtor_id'])) {
+    
+    $addData = 0;
+    $data = array();
+    
+    $data['realtorId']= $_SESSION['realtor_id'];
+    
+    if (isset($_POST['address']) && empty($_POST['address'])==false) {
+        echo "<p>address</p>";
+        $data['address']= $_POST['address'];
+        $addData++;
+    }
+
+    if (isset($_POST['addressUnit']) && empty($_POST['addressUnit'])==false) {
+        echo "<p>addressUnit</p>";
+        $data['addressUnit']= $_POST['addressUnit'];
+         $addData++;
+    }
+
+    if (isset($_POST['city']) && empty($_POST['city'])==false) {
+        echo "<p>city</p>";
+        $data['city']= $_POST['city'];
+         $addData++;
+    }
+
+    if (isset($_POST['zip']) && empty($_POST['zip'])==false) {
+        echo "<p>zip</p>";
+        $data['zip']= $_POST['zip'];
+         $addData++;
+    }
+
+    if (isset($_POST['price']) && empty($_POST['price'])==false) {
+        echo "<p>price</p>";
+        $data['price']= $_POST['price'];
+         $addData++;
+    }
+
+    if (isset($_POST['bathrooms']) && empty($_POST['bathrooms'])==false) {
+        echo "<p>bathrooms</p>";
+        $data['bathrooms']= $_POST['bathrooms'];
+         $addData++;
+    }
+
+    if (isset($_POST['bedrooms']) && empty($_POST['bedrooms'])==false) {
+        echo "<p>bedrooms</p>";
+        $data['bedrooms']= $_POST['bedrooms'];
+         $addData++;
+    }
+
+    if (isset($_POST['sqft']) && empty($_POST['sqft'])==false) {
+        echo "<p>sqft</p>";
+        $data['sqft']= $_POST['sqft'];
+         $addData++;
+    }
+
+    if (isset($_POST['lotSize']) && empty($_POST['lotSize'])==false) {
+        echo "<p>lotSize</p>";
+        $data['lotSIze']= $_POST['lotSize'];
+         $addData++;
+    }
+
+    if (isset($_POST['parkingSpaces']) && empty($_POST['parkingSpaces'])==false) {
+        echo "<p>parkingSpaces</p>";
+        $data['parkingSpaces']= $_POST['parkingSpaces'];
+         $addData++;
+    }
+
+    if (isset($_POST['yearBuilt']) && empty($_POST['yearBuilt'])==false) {
+        echo "<p>yearBuilt</p>";
+        $data['yearBuilt']= $_POST['yearBuilt'];
+         $addData++;
+    }
+
+    if (isset($_POST['neighborhood']) && empty($_POST['neighborhood'])==false) {
+        echo "<p>neighborhood</p>";
+        $data['neighborhood']= $_POST['neighborhood'];
+         $addData++;
+    }
+
+    if (isset($_POST['descriptionShort']) && strlen($_POST['descriptionShort'])>2) {
+        echo "<p>descriptionShort</p>";
+        $data['descriptionShort']= $_POST['descriptionShort'];
+         $addData++;
+    }
+
+    if (isset($_POST['descriptionLong']) && strlen($_POST['descriptionLong'])>2) {
+        echo "<p>descriptionLong</p>";
+        $data['descriptionLong']= $_POST['descriptionLong'];
+         $addData++;
+    }
+
+    $imageArray=array();
+    $j=0;
+    for ($i = 1; $i < 6; $i++) {
+
+        if (isset($_POST["add"])) {
+            echo '<p> Image post method caught!</p>';
+            //  echo '<p>'.$_POST['fileToUpload'.$i].'</p>';
+            if (is_uploaded_file($_FILES['fileToUpload' . $i]['tmp_name']) && getimagesize($_FILES["fileToUpload" . $i]["tmp_name"]) != false) {
+                // echo'<p>Entire image file caught</p>';
+                $upload_dir = "images/properties_full/";
+                $imageName = $_FILES["fileToUpload" . $i]["name"];
+                $upload_file = $upload_dir . basename($_FILES["fileToUpload" . $i]["name"]);
+
+                echo "<p>imagename=" . $imageName . "</p>";
+                echo "<p>upload_file=" . $upload_file . "</p>";
+                if (move_uploaded_file($_FILES["fileToUpload".$i]["tmp_name"], $upload_file)) {
+
+                    echo "The file " . basename($_FILES["fileToUpload".$i]["name"]) . " has been uploaded.";
+                    $imageArray[$j]= $imageName;
+                    $j++;
+                    
+                }
+                
+                
+                $addData++;
+            }
+        }
+    }
+
+    echo "<h1> addData= " . $addData . "</h1>";
+    if($addData>5){
+        
+        $property = new Property();
+        
+        $property->setAll($data);
+        $property->setRealtorId($_SESSION['realtor_id']);
+        $property->setImages($imageArray);
+        $property->setThumbnailFileName($upload_file);
+        $property->save();
+        
+        header('Location: properties.php');
+    }
+}

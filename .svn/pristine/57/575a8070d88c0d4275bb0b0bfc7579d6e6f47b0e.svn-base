@@ -1,0 +1,293 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+#buy {
+    font-style: oblique;
+    font-weight: bolder;
+    background-color: #fff;
+    color: #00bf8f;
+}
+
+/*body {
+    font-family: 'Raleway', sans-serif;
+}*/
+
+.description {
+    top: 30px;
+    position: relative;
+}
+
+h1 {
+    padding: 60px 0 0px;
+    text-align: center;
+}
+
+h2 {
+  padding: 0px 0 60px;
+  text-align: center;
+}
+
+.btn1 {
+  float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.navibar {
+    position: relative;
+    top:2%;
+    background-color:white;
+    border-bottom-color: white;
+}
+
+
+
+.navibar .navbar-header .navbar-brand {
+    color:darkred;
+    padding-top:28px;
+    font-size: 18px;
+
+
+}
+
+.navibar .navbar-header {
+    padding-left: 54px;
+
+
+}
+
+
+.navibar .navlist .list a {
+    padding-top: 28px;
+    color:DarkRed;
+    font-size: 18px;
+    padding-bottom: 2px;
+
+
+}
+
+.navibar .navlist .logList a {
+    padding-top: 28px;
+    color:DarkRed;
+    font-size: 18px;
+    padding-bottom: 2px;
+
+}
+
+.navibar .navlist .logList {
+    padding-right: 12%;
+
+
+}
+
+.navibar .navlist .logList .dropdown .dropdown-menu {
+
+    background-color: white;
+    border-color: white;
+
+
+
+}
+
+body{
+    position:relative;
+    max-width: 1024px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+.body .description {
+    position: relative;
+    top:20%;
+    padding-left: 5%;
+}
+
+.body .description h2 {
+    padding-left:2%;
+}
+
+.body .description .container .row .col-md-4 .thumb .img {
+    max-width: 100%;
+    height: auto;
+}
+
+.body .description .container .row .col-md-6 .messge1 .text1 {
+    width: 110%;
+    height: 250px;
+}
+
+
+.body .navlink {
+    position: relative;
+    top:57%;
+    padding-left:9%;
+}
+
+.body .navlink .row .col-md-2 .glyphicon-chevron-left {
+    padding-left: 1.5%;
+    top: -8px;
+}
+
+.body .navlink .row .col-md-2 .glyphicon {
+    padding-top: 43%
+}
+
+.body .navlink .row .col-md-2 .btn1 {
+    margin-top: 25%;
+    margin-left: -100%;
+}
+
+.body .navlink .row .col-md-2 .btn2 {
+    margin-top: 25%;
+    margin-left: -170%;
+}
+
+.body .navlink .row .col-md-2 .btn3 {
+    margin-top: 25%;
+    margin-left: -240%;
+}
+
+.body .navlink .row .col-md-2 .glyphicon-chevron-right {
+    right: 315%;
+    top: -8px;
+}
+
+.body .map .container .row .col-md-8 {
+    margin-left: -150px;
+    margin-top: -50px;
+}
+
+.body .map .container .row .col-md-8 .newtable {
+    padding-left: 55%;
+    padding-top: 0%;
+}
+
+.body .map {
+    position: relative;
+    top:68%;
+    padding-left:5%;
+}
+
+.body .map .row .col-md-4 {
+    top: 20px;
+}
+
+.body .map .row .col-md-4 .messge2 .text2 {
+    width: 130%;
+    height: 150px;
+}
+
+.footer {
+    position:relative;
+    top:20px;
+    height: 35px;
+    width: 100%;
+    background-color:windowframe;
+
+
+}
+
+@media(max-width:768px) {
+
+    .body{
+        position:relative;
+        max-width: 768px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 20px;
+
+    }
+
+    .body .description .container {
+        width: 750px;
+    }
+
+    .body .description .container .row .col-xs-4 .img{
+        position:relative;
+        max-height: 300px;
+    }
+
+    .body .navlink {
+        position: absolute;
+        padding-left: 9%;
+        top: 40%;
+        left: 40px;
+    }
+
+    .body .navlink .row .col-md-2 .btn1 {
+        margin-top: -700%;
+        margin-left: 50%;
+    }
+
+    .body .navlink .row .col-md-2 .btn2 {
+        margin-top: -790%;
+        margin-left: 160%;
+    }
+
+    .body .navlink .row .col-md-2 .btn3 {
+        margin-top: -873%;
+        margin-left: 270%;
+    }
+
+    .body .navlink .row .col-md-2 .glyphicon-chevron-left {
+        top: -137px;
+    }
+
+    .body .navlink .row .col-md-2 .glyphicon-chevron-right {
+        right: -173px;
+        top: -235px;
+    }
+
+    .body .description .container .row .col-md-6{
+        left: 20px;
+    }
+
+    .body .description .container .row .col-xs-4 .messge1 {
+        height: auto;
+        min-height: 132px;
+        width: 175px;
+        margin-top: 100%;
+        margin-left: -110%;
+    }
+
+    .body .map {
+        position: relative;
+        top:68%;
+        padding-left:5%;
+    }
+
+    .body .map .container .row .col-md-4 {
+        margin-left: -50px;
+        margin-top: 20px;
+        width: 111%;
+        top: 140px;
+        left: 40px;
+    }
+
+    .body .map .row .col-md-4 .messge2 .text2 {
+        width: 80%;
+        height: 150px;
+    }
+
+    .body .map .container .row .col-md-8 {
+        margin-left: -50px;
+        margin-top: 20px;
+        width: 111%;
+        top: -150px;
+        left: -70px;
+    }
+
+}
+*/

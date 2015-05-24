@@ -1,0 +1,209 @@
+<?php
+
+/**
+ * PropertySearchConstraint holds a single constraint on a Property search
+ * 
+ * Expects an array of values that can be operated on with a single function:
+ * anticipated operators are >=, <=, in, like, instr
+ * 
+ * e.g. id in 1,3,7    //allows multiple values
+ * e.g. bedrooms >= 5  //can only have single value
+ * e.g. description_long like "new"
+ *
+ * keyword search would need to use 'instr'
+ * 
+ * @author justina
+ */
+class PropertySearchConstraint
+{
+
+    public static $SINGULAR_VAL_OPS = array(
+        '=' => '=',
+        '>=' => '>=',
+        '<=' => '<=',
+        'instr' => 'instr'  //instring (aka contains)
+    );
+    public static $MULT_VAL_OPS = array(
+        'in' => 'in'
+    );
+    private $field;
+    private $operator;
+    private $values = array();
+    private $numValues = 0;
+
+    public function __construct($field, $op, $val)
+    {
+        //for date-related searches, search criteria must be converted
+        $val = self::dateSearchConversions($field, $val);
+        $this->field = $field;
+        $this->operator = $op;
+
+        if (strlen($val) > 0) {
+            $this->values[$this->numValues++] = $val;
+        }
+    }
+
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    public function getOperator()
+    {
+        return $this->operator;
+    }
+
+    public function getValues()
+    {
+        return $this->values;
+    }
+
+    public function setField($field)
+    {
+        $this->field = $field;
+    }
+
+    public function setOperator($op)
+    {
+        $this->operator = $op;
+    }
+
+    public function setValues($vals)
+    {
+        $this->values[$this->numValues++] = $vals;
+    }
+
+    public function sqlWhereClause()
+    {
+        $valCnt = 0;
+        $whereClause = "(";
+
+        //keyword search - "instr" has distinct format
+        if ($this->operator == 'instr') {
+            $whereClause = $whereClause . $this->instrClause();
+
+            //freeform search looks in several fields to find a match
+        } else if ($this->operator == 'freeform') {
+            $whereClause = $whereClause . $this->freeformClause();
+
+            //other searches
+        } else {
+            //process operators that accept multiple values as a list
+            $multValOp = key_exists($this->operator, self::$MULT_VAL_OPS);
+            if ($multValOp) {
+                $whereClause = $whereClause . $this->multiValueOpClause();
+
+                //process operators that only accept a single value
+            } else {
+                $whereClause = $whereClause . $this->singleValueOpClause();
+            }
+        }
+        $whereClause = $whereClause . ")";
+
+        return $whereClause;
+    }
+
+    private function instrClause()
+    {
+        $whereClause = "";
+        $valCnt = 0;
+        //loop through values
+        foreach ($this->values as $val) {
+            if ($valCnt++ > 0) {
+                $whereClause = $whereClause . " or ";
+            }
+            $whereClause = $whereClause . "instr(" . $this->field . ",";
+            $whereClause = $whereClause . "'" . $val . "') > 0";
+        }
+
+        return $whereClause;
+    }
+
+    private function multiValueOpClause()
+    {
+        $whereClause = $this->field . " " . $this->operator . " (";
+        $valCnt = 0;
+        //loop through values, making comma delimited list
+        foreach ($this->values as $val) {
+            if ($valCnt++ > 0) {
+                $whereClause = $whereClause . ",";
+            }
+            $whereClause = $whereClause . "'" . $val . "'";
+        }
+        $whereClause = $whereClause . ")";
+
+        return $whereClause;
+    }
+
+    private function singleValueOpClause()
+    {
+        $whereClause = "";
+        //loop through values, making field/op/val strings separated by "or"
+        $valCnt = 0;
+        foreach ($this->values as $val) {
+            if ($valCnt++ > 0) {
+                $whereClause = $whereClause . " or ";
+            }
+            $whereClause = $whereClause . $this->field . " " . $this->operator . " ";
+            $whereClause = $whereClause . "'" . $val . "'";
+        }
+
+        return $whereClause;
+    }
+
+    //freeform data entry field: user may have entered city, neighborhood, or zip
+    private function freeformClause()
+    {
+        $whereClause = "(";
+        $valCnt = 0;
+        //loop through values - first for city
+        foreach ($this->values as $val) {
+            if ($valCnt++ > 0) {
+                $whereClause = $whereClause . " or ";
+            }
+            $whereClause = $whereClause . "instr(city,";
+            $whereClause = $whereClause . "'" . $val . "') > 0";
+        }
+        $whereClause = $whereClause . " or ";
+
+        //loop through values - second for neighborhood
+        $valCnt = 0;
+        foreach ($this->values as $val) {
+            if ($valCnt++ > 0) {
+                $whereClause = $whereClause . " or ";
+            }
+            $whereClause = $whereClause . "instr(neighborhood,";
+            $whereClause = $whereClause . "'" . $val . "') > 0";
+        }
+        $whereClause = $whereClause . " or ";
+
+        //loop through values - lastly for zip
+        $valCnt = 0;
+        foreach ($this->values as $val) {
+            if ($valCnt++ > 0) {
+                $whereClause = $whereClause . " or ";
+            }
+            $whereClause = $whereClause . "zip = ";
+            $whereClause = $whereClause . "'" . $val . "'";
+        }
+        $whereClause = $whereClause . ")";
+
+        return $whereClause;
+    }
+    
+    private static function dateSearchConversions ($searchFld, $search)
+    {
+        //convert search data to year built (from "age")
+        if ($searchFld == "yearBuilt" && $search != "") {
+            $search = date("Y") - (int) $search;
+        }
+        //convert search data to date listed (from days on market)
+        if ($searchFld == "dateListed" && $search != "") {
+            date_default_timezone_set ('America/Los_Angeles');
+            $search = date("Y-m-d", mktime(0,0,0) - ((int) $search * 24 * 60 * 60));
+        }
+        
+        return $search;
+    }
+
+}

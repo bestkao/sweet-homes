@@ -1,0 +1,10 @@
+<?php
+    require_once("SweetHomeAutoloader.php");
+
+    //include 'views/Register.php';
+    //include 'views/InputFilter.php';
+
+    $registrationPage = new Register();
+    $registrationPage->display();
+
+?>

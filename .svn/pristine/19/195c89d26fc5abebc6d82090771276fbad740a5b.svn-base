@@ -1,0 +1,259 @@
+<?php
+
+include 'Model.php';
+include 'models/ModelDatabase.php';
+include 'models/PropertyAdder.php';
+include 'models/PropertyRemover.php';
+include 'models/PropertyEditor.php';
+include 'models/PropertyGetter.php';
+
+/**
+ * This Model class represents a Property
+ * This class has the columns of the Property table statically mapped as attributes.
+ * So, if any number of columns are added or edited in the Property table in the Database
+ * then attributes in this class has to be modified manually.
+ *
+ * A new Property can be instantiated and attirbutes can be set using the setters.
+ * Then the new Property is saved to the database using the save() function.
+ * 
+ * And an exisiting Property can be retirived using the class method find($uniqueID)
+ * Similarly, existing Property is saved to the database after editing by using
+ * the save() function.
+ * 
+ * Also, the class method getAll() returns an array of all the available 
+ * Property object from the Database 
+ * 
+ * @author sashi
+ */
+class Property implements Model {
+
+    private $id;
+    private $address;
+    private $address_unit;
+    private $zip;
+    private $state;
+    private $city;
+    private $description_long;
+    private $description_short;
+    private $price;
+    private $thumbnail_filename;
+    private $sold;
+    private $realtorID;
+    private $isNew;
+    private static $propertyDatabase = Null;
+
+    public function __construct() {
+        self::initPropertyDatabase();
+    }
+
+    public function loadObject(array $row) {
+        $this->setID($row['id']);
+        $this->setAddress($row['address']);
+        $this->setAddressUnit($row['address_unit']);
+        $this->setZip($row['zip']);
+        $this->setCity($row['city']);
+        $this->setState($row['state']);
+        $this->setLongDescription($row['description_long']);
+        $this->setShortDescription($row['description_short']);
+        $this->setThumbnailFileName($row['thumbnail_filename']);
+    }
+
+    public function buildDataArray() {
+        $data = [
+            "id" => $this->id,
+            "address" => $this->address,
+            "address_unit" => $this->address_unit,
+            "zip" => $this->zip,
+            "state" => $this->state,
+            "city" => $this->city,
+            "description_short" => $this->description_short,
+            "description_long" => $this->description_long
+        ];
+        return $data;
+    }
+
+    public function getID() {
+        return $this->id;
+    }
+
+    public function getAddress() {
+        return $this->address;
+    }
+
+    public function getAddressUnit() {
+        return $this->address_unit;
+    }
+
+    public function getZip() {
+        return $this->zip;
+    }
+
+    public function getState() {
+        return $this->state;
+    }
+
+    public function getCity() {
+        return $this->city;
+    }
+
+    public function getLongDescription() {
+        return $this->description_long;
+    }
+
+    public function getShortDescription() {
+        return $this->description_short;
+    }
+
+    public function getPrice() {
+        return $this->price;
+    }
+
+    public function getRealtorID() {
+        return $this->realtorID;
+    }
+
+    public function getThumbnailFileName() {
+        return $this->thumbnail_filename;
+    }
+
+    public function isSold() {
+        return $this->sold;
+    }
+
+    public function setID($id) {
+        $this->id = $id;
+    }
+
+    public function setAddress($addr) {
+        $this->address = $addr;
+    }
+
+    public function setAddressUnit($addrU) {
+        $this->address_unit = $addrU;
+    }
+
+    public function setZip($zp) {
+        $this->zip = $zp;
+    }
+
+    public function setState($st) {
+        $this->state = $st;
+    }
+
+    public function setCity($ct) {
+        $this->city = $ct;
+    }
+
+    public function setLongDescription($ld) {
+        $this->description_long = $ld;
+    }
+
+    public function setShortDescription($sd) {
+        $this->description_short = $sd;
+    }
+
+    public function setPrice($prc) {
+        $this->price = $prc;
+    }
+
+    public function setRealtorID($rid) {
+        $this->realtorID = $rid;
+    }
+
+    public function setThumbnailFileName($tbFile) {
+        $this->thumbnail_filename = $tbFile;
+    }
+
+    public function setIsNew($new) {
+        $this->isNew = $new;
+    }
+
+    /**
+     * Save this object to the Database
+     */
+    public function save() {
+        if ($this->isNew) {
+            //add new
+            $data = $this->buildDataArray();
+            self::$propertyDatabase->add($data);
+            $this->isNew = false;
+        } else {
+            //edit
+            $data = $this->buildDataArray();
+            self::$propertyDatabase->edit($data);
+        }
+    }
+
+    /**
+     * Remove this object from the Database
+     */
+    public function remove() {
+        self::$propertyDatabase->remove($this->id);
+    }
+
+    public static function find($uniqueID) {
+        //extract the row with given ID from Database
+        //if found create a Property object with the retrieved attributes
+        //then set the isNew of that object to false
+        //return the object
+    }
+
+    /**
+     * Returns an array of all the available Property objects from the Database
+     * Or if there are no available records then returns null.
+     */
+    public static function getAll() {
+        self::initPropertyDatabase();
+        $properties = null;
+
+        $list = self::$propertyDatabase->get();
+        $num_results = $list->num_rows;
+
+        if ($num_results > 0) {
+            $properties = array($num_results);
+
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $list->fetch_assoc();
+
+                $properties[$i] = new Property();
+                $properties[$i]->loadObject($row);
+            }
+        }
+        return $properties;
+    }
+
+    /**
+     * 
+     * @param type $key is the search criteria by which matchin properties will
+     *  be selected
+     * @return array of Property objects matching the search keyu if found 
+     * or else null
+     */
+    public static function getBySearch($key) {
+        self::initPropertyDatabase();
+        $properties = null;
+
+        $list = self::$propertyDatabase->getBySearch($key);
+        $num_results = $list->num_rows;
+
+        if ($num_results > 0) {
+            $properties = array($num_results);
+
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $list->fetch_assoc();
+
+                $properties[$i] = new Property();
+                $properties[$i]->loadObject($row);
+            }
+        }
+
+        return $properties;
+    }
+
+    private static function initPropertyDatabase() {
+        if (is_null(self::$propertyDatabase)) {
+            self::$propertyDatabase = new ModelDatabase(new PropertyAdder("Property"), new PropertyRemover("Property"), new PropertyEditor("Property"), new PropertyGetter("Property"));
+        }
+    }
+
+}

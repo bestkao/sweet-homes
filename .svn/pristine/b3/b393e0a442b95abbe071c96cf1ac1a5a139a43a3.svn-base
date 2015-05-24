@@ -1,0 +1,558 @@
+<?php
+
+/**
+ * Description of MemberProfile
+ *
+ * @author sashi
+ */
+class MemberProfile extends Page 
+{
+
+    public function __construct() 
+    {
+        parent::__construct();
+        ?>
+        <html>
+            <head>
+                <title>Properties</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+                <link rel="icon" href="images/favicon.ico">
+                <!-- Custom styles for this template -->
+                <link href="css/Header.css" rel="stylesheet">
+                <link href="css/MemberProfile.css" rel="stylesheet">
+                <link href="css/Footer.css" rel="stylesheet">
+            </head>
+        <?php
+    }
+
+    public function display() {
+        $this->header->display();
+        $this->displayContent();
+        $this->footer->display();
+        $this->dropDownScript();
+    }
+
+    public function displayContent() {
+        ?>
+            <br/><br/><br/><br/><br/>
+            <div class="container-fluid navbar navbar-default " role="navigation">
+
+                <!-- second menu bar to allow bread crums-->
+                <ul class="nav navbar-nav list">   
+                    <li ><a id="listing" href="memberProfile.php" >
+                            Profile</a></li> 
+
+      
+                </ul>
+                 <br/><br/>
+    
+
+            </div>
+            
+            <?php
+                $this->displaySearch();
+                
+                if(isset($_GET['content'])){
+                    
+                    /*if(strcmp($_GET['content'], "add_preference")==0){
+                        $this->addPreferenceForm();
+                    }*/
+                    if(strcmp($_GET['content'], "preference_added")==0){
+                        $this->displayFlashMessage("<p>Your Preference has been "
+                                . "successfully added!</p>"
+                                . "<p>We will notify you as soon as we get"
+                                . " your choice of House.</p>");
+                    }
+                }
+                
+                $this->addPreferenceForm();
+                
+                $this->displayPreference();
+             ?>
+            
+            
+
+            
+            
+        <br/><br/><br/><br/><br/><br/><br/><br/>
+        <?php
+    }
+    
+    private function displaySearch()
+    {?>
+    
+            <div class="jumbotron">
+                <div class="container">
+
+                    <div class="searchbar1 simple-search" >
+
+
+                        <form class="search" action="propertyList.php" method="post" >
+
+                            <input class="form-control SearchBox" name="searchData" value = "" placeholder="Search City, Neighborhood, Zip">
+
+                            <button class="btn btn-primary ButtonSearch " type="submit">Search</button>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>    
+        
+        
+    <?php
+       
+    }
+    
+    
+    public function displayPreference()
+    {
+        
+        ?>
+            <div class="container" style="background-color: darkseagreen;">     
+                <h3 style="text-align: center;">Your Prefered Properties</h3>
+        <?php
+        $where= "member_id =".$_SESSION['user_id'];
+        $propertiesPreference = PropertyPreference::getBySearch($where);
+  
+        if(count($propertiesPreference)==1){
+            $preference= $propertiesPreference[0];
+        }
+        
+        if(is_null($propertiesPreference)){
+            echo '<p style="text-align: center;">You have not set any Property Preference yet.</p>';
+            echo '<p style="text-align: center;">So, Please set your Property Preference to get desired results</p>';
+        }
+        else if($preference instanceof PropertyPreference){
+            $this->displayPreferedProperties($preference);
+        }
+        else{
+            echo'Sorry! We have encountered an error.';
+        }
+        ?>
+
+        </div>
+    <?php
+    }
+    
+    public function addPreferenceForm()
+    {
+        $where= "member_id =".$_SESSION['user_id'];
+        $propertiesPreference = PropertyPreference::getBySearch($where);
+        if(is_null($propertiesPreference) || count($propertiesPreference)==0){
+            $this->preferenceAdd();
+        }
+        else if(count($propertiesPreference)==1)
+        {
+            $this->editPreference($propertiesPreference[0]);
+        }
+    ?>
+        
+            
+     <?php       
+        
+        
+    }
+    
+    public function preferenceAdd() 
+    {
+      ?>
+<div class="jumbotron" style=" top:5%; left: 200px;"> 
+            <form class="form-vertical" 
+            <?php echo "action='addPreference.php'";
+            ?>
+                      method="POST">
+                    <fieldset>
+                        <div id="legend">
+                            <legend class="">Add Property Preference</legend>
+                          
+                        </div>
+
+                        
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Zip</label>
+                            <div class="controls">
+                                <input type="text"  name="zip" 
+            
+                                       class="input-xlarge">
+
+                            </div>
+                        </div>
+                        <br/>
+                        
+                        <div class="control-group">
+                            <!-- E-mail -->
+                            <label class="control-label" >Neighborhood</label>
+                            <div class="controls">
+                                <input type="text"  name="neighborhood" 
+        
+                                       class="input-xlarge">
+                                <p class="help-block"></p>
+                            </div>
+                       </div>
+                       <br/>
+                       
+                        <div class="control-group">
+                            <label class="control-label" >Number of Bedrooms:</label>
+                            <select name ="bedrooms">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <br/>
+                        
+                        <div class="control-group">
+                            <label class="control-label" >Number of Bathrooms:</label>
+                            <select name ="bathrooms">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                        </div>
+                                                   
+                        <br/>
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >City:</label>
+                                  <select name ="city">
+                                        <option value="Alameda">Alameda</option>
+                                        <option value="Albany">Albany</option>
+                                        <option value="Antioch">Antioch</option>
+                                        <option value="Atherton">Atherton</option>
+                                        <option value="Belmont">Belmont</option>
+                                        <option value="Belvedere">Belvedere</option>
+                                        <option value="Benicia">Benicia</option>
+                                        <option value="Berkeley">Berkeley</option> 
+                                         <option value="Brentwood">Brentwood</option>
+           
+                                        <option value="San Francisco">San Francisco</option>
+                                        <option value="San Mateo">San Mateo</option>
+
+                                    </select>
+
+                        </div>                       
+                        <br/>
+                        
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Minimum Price:</label>
+                                  <select name ="minimumPrice">
+                                        <option value="50000">50,000</option>
+                                        <option value="100000">100,000</option>
+                                        <option value="150000">150,000</option>
+                                        <option value="200000">200,000</option>
+                                        <option value="250000">250,000</option>
+                                        <option value="300000">300,000</option>
+                                        <option value="350000">350,000</option>
+                                        <option value="400000">400,000</option> 
+                                         <option value="450000">450,000</option>
+    
+
+                                    </select>
+
+                        </div>     
+                        <br/>
+                        
+                         <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Maximum Price:</label>
+                                  <select name ="maximumPrice">
+                                   <?php
+                                     $prices= array("50,000"=>50000,"100,000"=>100000
+                                      ,"150,000"=>150000,"200,000"=>200000,
+                                      "250,000"=>250000,"300,000"=>300000,"350,000"=>350000,
+                                      "400,000"=>400000,"450,000"=>450000,"500,000"=>500000
+                                         ,"1,000,000"=>1000000,"2,000,000"=>2000000
+                                         ,"3,000,000"=>3000000,"4,000,000"=>4000000);
+                                                                       
+                                  foreach ($prices as $key => $value) {
+                                        echo '<option value="'.$value.'">'.$key.'</option>';
+                                      
+                                  }
+                                              ?>
+        
+    
+
+                                    </select>
+
+                        </div>     
+                        <br/>
+                        
+                        <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                                <button class="btn btn-success">Add Preference</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                
+                    </div>
+            
+      <?php  
+    }
+    
+    private function editPreference($preference)
+    {?>
+<div class="jumbotron" style=" top:5%; left: 200px;"> 
+            <form class="form-vertical" 
+            <?php echo "action='editPreference.php?p-i-d=".$preference->getId()."'";
+            ?>
+                      method="POST">
+                    <fieldset>
+                        <div id="legend">
+                            <legend class="">Edit Property Preference</legend>
+                          
+                        </div>
+
+                        
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Zip</label>
+                            <div class="controls">
+                                <input type="text"  name="zip"
+                                      <?php 
+                                         echo 'value="'.$preference->getZip().'"';
+                                      ?>
+                                       class="input-xlarge">
+
+                            </div>
+                        </div>
+                        <br/>
+                        
+                        <div class="control-group">
+                            <!-- E-mail -->
+                            <label class="control-label" >Neighborhood</label>
+                            <div class="controls">
+                                <input type="text"  name="neighborhood" 
+                                      <?php 
+                                         echo 'value="'.$preference->getNeighborhood().'"';
+                                      ?>
+                                       class="input-xlarge">
+                                <p class="help-block"></p>
+                            </div>
+                       </div>
+                       <br/>
+                       
+                        <div class="control-group">
+                            <label class="control-label" >Number of Bedrooms:</label>
+                            <select name ="bedrooms">
+                            <?php
+                            $bedrooms = intval($preference->getBedrooms());
+                       
+                            echo '<option value="'.$bedrooms.'">'.$bedrooms.'</option>';
+                            
+                            if($bedrooms!=1) echo'<option value="1">1</option>';
+                            if($bedrooms!=2) echo'<option value="2">2</option>';
+                            if($bedrooms!=3) echo'<option value="3">3</option>';
+                            if($bedrooms!=4) echo'<option value="4">4</option>';
+                            if($bedrooms!=5) echo'<option value="4">4</option>';
+                            if($bedrooms!=6) echo'<option value="1">6</option>';
+                       ?>
+
+                            </select>
+                        </div>
+                        <br/>
+                        
+                        <div class="control-group">
+                            <label class="control-label" >Number of Bathrooms:</label>
+                            <select name ="bathrooms">
+                            <?php
+                            $bathrooms = intval($preference->getBathrooms());
+                       
+                            echo '<option value="'.$bathrooms.'">'.$bathrooms.'</option>';
+                            
+                            if($bathrooms!=1) echo'<option value="1">1</option>';
+                            if($bathrooms!=2) echo'<option value="2">2</option>';
+                            if($bathrooms!=3) echo'<option value="3">3</option>';
+                            if($bathrooms!=4) echo'<option value="4">4</option>';
+                            if($bathrooms!=5) echo'<option value="4">4</option>';
+                            if($bathrooms!=6) echo'<option value="1">6</option>';
+                           ?>
+            
+                           </select>
+                        </div>
+                                                   
+                        <br/>
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >City:</label>
+                                  <select name ="city">
+                            <?php
+                            $city= $preference->getCity();
+                            $cities = array("Alameda","Albany","Antioch",
+                                    "Atherton","Belmont","Belvedere","Berkeley","Benicia",
+                                    "Brentwood","San Francsico", "San Jose","San Mateo",
+                                    "Oakland","Richmond");
+                            echo '<option value="'.$city.'">'.$city.'</option>';
+                            foreach ($cities as $value) {
+                                if(strcmp($city, $value)!=0){
+                                   echo'<option value="'.$value.'">'.$value.'</option>'; 
+                                }
+                            }
+                            
+
+                           
+                            ?>
+  
+
+                                    </select>
+
+                        </div>                       
+                        <br/>
+                        
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Minimum Price:</label>
+                                  <select name ="minimumPrice">
+                                  <?php
+                                  
+                                  $price = $preference->getMinimumPrice();
+                                  $price = intval($price);
+                                  $prices= array("50,000"=>50000,"100,000"=>100000
+                                      ,"150,000"=>150000,"200,000"=>200000,
+                                      "250,000"=>250000,"300,000"=>300000,"350,000"=>350000,
+                                      "400,000"=>400000,"450,000"=>450000,"500,000"=>500000);
+                                  
+                                  echo '<option value="'.$price.'">'.number_format($price).'</option>';
+                                  
+                                  foreach ($prices as $key => $value) {
+                                      if($value!= intval($price)){
+                                          echo '<option value="'.$value.'">'.$key.'</option>';
+                                      }
+                                  }
+                                  ?>
+                                        
+
+                                    </select>
+
+                        </div>     
+                        <br/>
+                        
+                         <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  >Maximum Price:</label>
+                                  <select name ="maximumPrice">
+                                  <?php
+                                  $price = $preference->getMaximumPrice();
+                                  $price = intval($price);
+                                  
+                                  $prices= array("50,000"=>50000,"100,000"=>100000
+                                      ,"150,000"=>150000,"200,000"=>200000,
+                                      "250,000"=>250000,"300,000"=>300000,"350,000"=>350000,
+                                      "400,000"=>400000,"450,000"=>450000,"500,000"=>500000
+                                         ,"1,000,000"=>1000000,"2,000,000"=>2000000
+                                         ,"3,000,000"=>3000000,"4,000,000"=>4000000);
+                                  echo '<option value="'.$price.'">'.number_format($price).'</option>';
+                                  
+                                  foreach ($prices as $key => $value) {
+                                      if($value!= intval($price)){
+                                          echo '<option value="'.$value.'">'.$key.'</option>';
+                                      }
+                                  }
+                                  ?>
+
+                                    </select>
+
+                        </div>     
+                        <br/>
+                        
+                        <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                                <button class="btn btn-success">Edit Preference</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                
+                    </div>
+                    
+     <?php   
+    }
+    private function displayFlashMessage($message) 
+    {?>
+    <div class="container" style="background-color: #28a4c9;">     
+        <h3 style="text-align: center;">
+            <?php echo $message;?>
+        </h3>
+                
+    </div>
+    
+        
+    <?php
+        
+    }
+    
+    
+    private function displayPreferedProperties($preference)
+    {
+        $clause="";
+        
+        if(strlen($preference->getCity())>2)
+        {
+            $clause= "city='".$preference->getCity()."'";
+        }
+        
+        if(strlen($preference->getNeighborhood())>2)
+        {
+            $clause= $clause." and neighborhood='".$preference->getNeighborhood()."'";
+        }
+        
+        if(strlen($preference->getBedrooms())>=1)
+        {
+            $clause=$clause." and bedrooms='".$preference->getBedrooms()."'";
+        }
+        
+        if(strlen($preference->getBathrooms())>=1)
+        {
+            $clause=$clause." and bathrooms='".$preference->getBathrooms()."'";
+        }
+        
+        if(strlen($preference->getZip())>=3)
+        {
+            $clause=$clause." and zip='".$preference->getZip()."'";
+        }
+        
+        if(strlen($preference->getMinimumPrice())>=5){
+            $clause=$clause." and price>='".$preference->getMinimumPrice()."'";
+        }
+        
+        if(strlen($preference->getMaximumPrice())>=5){
+            $clause=$clause." and price<='".$preference->getMaximumPrice()."'";
+        }        
+        //echo '<h1>'.$clause.'</h1>';
+        
+    ?>
+     <div id="wrapper">
+     <iframe id ="frame" 
+      <?php       
+      echo 'src="http://sfsuswe.com/~f14g01/propertyListing.php?clause='.$clause.'"';
+        ?>
+             src="any.html">
+     </iframe>
+     </div>
+     <br/><br/>
+    <!--<div> 
+    <object type="text/html" data="http://sfsuswe.com/~f14g01/propertyListing.php"  style="border:5px ridge blue">
+    </object></div>-->
+    <?php
+    }
+    
+    private function getPreferenceClause($preference)
+    {
+        $whereClause="city='".$preference->getCity()."'";
+        $whereClause=", zip='".$preference->getZip()."'";
+        
+        $properties= Property::getBySearch($whereClause);
+    }
+}

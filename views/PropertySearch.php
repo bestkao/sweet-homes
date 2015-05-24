@@ -1,0 +1,126 @@
+<?php
+
+/**
+ * PropertySearch holds the current list of search constraints on a Property search
+ * It also allows constraints to be deleted and re-added in a last-in/first-out basis
+ * to allow for an "undo"/"redo" functionality
+ *
+ * @author justina
+ */
+class PropertySearch
+{
+
+    private $constraintList = array();
+    private $deletedList = array();
+
+    public function __construct($constraint)
+    {
+        if ($constraint != null) {
+            $this->addConstraint($constraint);
+        }
+    }
+
+    public function getTestVar()
+    {
+        return $this->testVar;
+    }
+
+    //note, "addConstraint" should work for both add, "empty", and replace functionality
+    public function addConstraint($constraint)
+    {
+        $key = $constraint->getField();
+        $op = $constraint->getOperator();
+        $values = $constraint->getValues();
+
+        //if new values are empty, clear if it exists
+        if (count($values) == 0) {
+            if (array_key_exists($key, $this->constraintList)) {
+                $this->delete($key);
+            }
+            //otherwise, add constraint    
+        } else {
+            //if the constraint already exists and is not identical; backup before
+            //replacing
+            if (array_key_exists($key, $this->constraintList) &&
+                    $values != $this->constraintList[$key]->getValues() &&
+                    $op != $this->constraintList[$key]->getOperator()) {
+                $this->backUpDeleted($key);
+            }
+            $this->constraintList[$key] = $constraint;
+        }
+    }
+
+    public function delete($key)
+    {
+        $this->backUpDeleted($key);
+        unset($this->constraintList[$key]);
+    }
+
+    public function deleteMostRecent()
+    {
+        $idxLast = count($this->constraintList) - 1;
+        if ($idxLast >= 0) {
+            $constraintsByIdx = array_values($this->constraintList);
+            $keyLast = $constraintsByIdx[$idxLast]->getField();
+            $this->backUpDeleted($keyLast);
+            unset($this->constraintList[$keyLast]);
+        }
+    }
+
+    //make backup of specified constraint.  Note that deleted list is NOT
+    //stored by key; need to be able to store multiple entries with same field value
+    //
+    private function backUpDeleted($key)
+    {
+        $this->deletedList[] = $this->constraintList[$key];
+    }
+
+    public function restoreMostRecent()
+    {
+        if (count($this->deletedList) > 0) {
+            //move pointer to last entry and contain latent key
+            end($this->deletedList);
+            $delKey = key($this->deletedList);
+            reset($this->deletedList);
+            //add to active constraint list
+            $this->addConstraint($this->deletedList[$delKey]);
+            //remove from deleted list
+            unset($this->deletedList[$delKey]);
+        }
+    }
+
+    public function clear()
+    {
+        //first back up constraints
+        foreach ($this->constraintList as $constraint) {
+            $this->backUpDeleted($constraint->getField());
+        }
+        //now delete constraints
+        foreach ($this->constraintList as $key => $value) {
+            unset($this->constraintList[$key]);
+        }
+    }
+
+    //build SQL where clause based on constraints
+    public function sqlWhereClause()
+    {
+        // echo "<p>PropertySearch: sqlWhereClause() entry </p>";
+        $whereClause = "";
+        $fldCnt = 0;
+        //loop through contraints
+        foreach ($this->constraintList as $key => $constraint) {
+            if ($fldCnt > 0) {
+                $whereClause = $whereClause . " and ";
+            }
+            $whereClause = $whereClause . $constraint->sqlWhereClause();
+            $fldCnt++;
+        }
+        if ($fldCnt == 0) {
+            $whereClause = "1";
+        }
+
+        // echo "in PS:sqlWhereClause; where=".$whereClause."</br>";
+        return $whereClause;
+    }
+
+}

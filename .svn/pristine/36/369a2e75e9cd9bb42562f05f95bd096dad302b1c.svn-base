@@ -1,0 +1,48 @@
+
+
+#realtor {
+    font-style: oblique;
+    font-weight: bolder;
+    background-color: #fff;
+    color: #00bf8f;
+}
+
+.RealtorListing {
+    position: relative;
+    top:63px;
+    padding-left: 12%;
+}
+
+.RealtorListing .row .realtorpic1 .img {
+    width: 73%;
+    height: 65px;
+}
+
+.RealtorListing .row .realtortext1 .textarea1 {
+    width: 100%;
+    height: 65px;
+}
+
+.RealtorListing .row .realtortext1 .contact1 {
+
+}
+
+.RealtorListing .row .realtortext1 .rev1 {
+    float:right;
+
+}
+
+.RealtorListing .row .realtortext1 .cont1 {
+    float:right;
+    margin-left: 13px;
+
+}
+
+
+.RealtorListing h2 {
+    padding-left: 30%;
+}
+
+.RealtorListing .row .realtorpic1 .rate1 {
+    padding-left: 32%;
+}

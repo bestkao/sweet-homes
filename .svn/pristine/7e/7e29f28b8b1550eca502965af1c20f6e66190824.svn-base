@@ -1,0 +1,49 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of MemberLogIn
+ *
+ * @author sashi
+ */
+class MemberLogIn extends Page
+{
+    public function __construct()
+    {
+         parent::__construct();?>
+                 <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Buy</title>
+            <link rel="icon" href="images/favicon.ico">
+
+            <!-- Bootstrap core CSS -->
+            <link href="css/bootstrap.css" rel="stylesheet">
+
+
+            <!-- Custom styles for this template -->
+            <link href="css/Header.css" rel="stylesheet">
+            
+            <link href="css/Footer.css" rel="stylesheet">
+        </head>
+<?php
+    }
+    
+    public function display()
+    {
+        $this->displayHeader();
+        $this->displayContent();
+        $this->displayFooter();
+    }
+
+    public function displayContent()
+    {
+        
+    }
+//put your code here
+}

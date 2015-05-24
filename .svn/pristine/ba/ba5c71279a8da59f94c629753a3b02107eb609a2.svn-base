@@ -1,0 +1,9 @@
+<?php
+require_once("SweetHomeAutoloader.php");
+
+           $homePage = new Home();
+            
+           $homePage->display();
+          
+    
+

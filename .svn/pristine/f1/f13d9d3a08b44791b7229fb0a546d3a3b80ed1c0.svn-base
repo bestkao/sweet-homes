@@ -1,0 +1,3 @@
+<?php
+$memberLogInPage = new MemberLogIn();
+$memberLogInPage->display();

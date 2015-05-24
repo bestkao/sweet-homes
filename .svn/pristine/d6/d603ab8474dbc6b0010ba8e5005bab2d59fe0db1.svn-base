@@ -1,0 +1,96 @@
+<?php
+
+require_once("SweetHomeAutoloader.php");
+
+//need session to pass the search constraint object for pagination
+if(!isset($_SESSION)) { 
+    session_start(); 
+} 
+
+$FLD_OP_DELIM = "/";
+$limitPerPage = 5;
+
+//All records will be displayed if no search is selected
+
+//get user's search entry variable, if selected (may be used to request 'clear', below)
+if (isset($_GET['searchFld'])) {
+    $searchFld = $_GET['searchFld'];
+    $searchFld = InputFilter::filter($searchFld);
+}
+
+//if user is coming from 'Home' page (or unknown origin) or has pressed 
+//"clear search" button; unset session var storing search data
+if (
+        (
+        !isset($_SESSION['origin']) || 
+        $_SESSION['origin'] == "Home"
+        ) ||
+        (
+        isset($searchFld) && 
+        $searchFld == PropertyList::$SRCHFLD_CLEAR
+        )
+    ) {
+    
+    //if current search information is stored, unset it
+    if (isset($_SESSION['currSearch'])) {
+        unset($_SESSION['currSearch']);
+    }
+    //if var containing freeform (main) search text exists, unset it
+    if (isset($_SESSION['freeformMain'])) {
+        unset($_SESSION['freeformMain']);
+    }
+    //if var containing freeform (keyword) search text exists, unset it
+    if (isset($_SESSION['freeformKeyword'])) {
+        unset($_SESSION['freeformKeyword']);
+    }
+}
+
+//Create a new property list page with current search.  NOTE: SESSION var 
+//'currSearch' maintains existing search information. See PropertyList::initPropertySearch()
+$propertyListPage = new PropertyList();
+
+if (isset($_GET['searchData'])) {
+    $search = $_GET['searchData'];
+    $search = InputFilter::filter($search);
+}
+
+//if new search request was found, process
+if (isset($searchFld) && isset($search) && is_string($search)) {
+    //need to retain and display user's freeform search entry
+    if ($searchFld == PropertyList::$SRCHFLD_FREEFORM_MAIN) {
+        $_SESSION['freeformMain'] = $search;
+    }
+    //need to retain and display user's keyword search entry
+    if ($searchFld == PropertyList::$SRCHFLD_FREEFORM_KEYWORD) {
+        $_SESSION['freeformKeyword'] = $search;
+    }
+    //parse search field for field name and operator
+    $opDelim = strpos($searchFld, $FLD_OP_DELIM);
+    $operator = substr($searchFld, $opDelim + 1);
+    if ($opDelim) {
+        $searchFld = substr($searchFld, 0, strpos($searchFld, $FLD_OP_DELIM));
+    } else {
+        $searchFld = "";
+    }
+    //echo "search field = ".$searchFld.", operator = ".$operator."</br>";
+
+    //create new search constraint
+    $constraint = new PropertySearchConstraint($searchFld, $operator,
+                  $search);
+    $_SESSION['constraint'] = $constraint;
+    $propertyListPage->setSearchAddConstraint($constraint);
+    //echo "where clause = " . $constraint->sqlWhereClause() . "</br>";
+}
+
+//manage paging
+$pagination = new Pagination();
+$pagination->setLimit($limitPerPage);
+$propertyListPage->setLimit($limitPerPage);
+
+if (isset($_GET['index'])) {
+    $pagination->setStartIndex($_GET['index']);
+    $propertyListPage->setCurrentPage($_GET['index']);
+} else
+    $pagination->setStartIndex();
+
+$propertyListPage->display();

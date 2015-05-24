@@ -1,0 +1,28 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    margin-top: -60px; /* negative value of footer height */
+    padding-top: 20px;
+    background-color: #1f2b2e;
+    color: #506368;
+}
+
+#footer a {
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    #footer {
+        height: 150px;
+    }
+}

@@ -1,0 +1,64 @@
+<?php
+require_once("SweetHomeAutoloader.php");
+
+//need session to pash the search constraint object for pagination
+session_start();
+
+$limitPerPage = 5;
+//All records will be displayed if no search is selected
+//echo "origin is set to " . $_SESSION['origin'] . "</br>";
+//reset search if session status is unclear (no origin), or coming from Home page 
+if (isset($_SESSION['origin']) == false || $_SESSION['origin'] == "Home") {
+    session_unset();
+    //echo "Session unset</br>";
+}
+//create a new property list page with current search
+$propertyListPage = new PropertyList();
+
+//get user's search entry variable, if selected
+if (isset($_POST['searchFld']) == true) {
+    $searchFld = $_POST['searchFld'];
+    //echo "searchFld = " . $searchFld . "</br>";
+} else {
+    //echo "No searchFld found.</br>";
+    $searchFld = "city/instr";
+}
+
+//get user's search query, if entered/selected
+if (isset($_POST['searchData']) == true) {
+    $search = $_POST['searchData'];
+    $search = InputFilter::filter($search);
+
+    if (is_string($search)) {
+        $search = $_POST['searchData'];
+        //echo "search value = ".$search."</br>";
+        //echo "search type = ".$_POST['searchType']."</br>";
+        $operator = substr($searchFld, strpos($searchFld, "/") + 1);
+        $searchFld = substr($searchFld, 0, strpos($searchFld, "/"));
+        //echo "search field = ".$searchFld.", operator = ".$operator."</br>";
+
+        $constraint = new PropertySearchConstraint($searchFld, $operator,
+                $search);
+        $_SESSION['constraint'] = $constraint;
+        $propertyListPage->setSearchAddConstraint($constraint);
+    }
+} else {
+    //echo "No search criteria found.</br>";
+}
+
+$pagination = new Pagination();
+$pagination->setLimit($limitPerPage);
+$propertyListPage->setLimit($limitPerPage);
+
+if (isset($_GET['index'])) {
+    $pagination->setStartIndex($_GET['index']);
+    $propertyListPage->setCurrentPage($_GET['index']);
+    if (isset($_SESSION['constraint']))
+        $propertyListPage->setSearchAddConstraint($_SESSION['constraint']);
+} else
+    $pagination->setStartIndex();
+
+
+
+$propertyListPage->display();
+

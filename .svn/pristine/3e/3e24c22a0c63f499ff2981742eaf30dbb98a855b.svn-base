@@ -1,0 +1,22 @@
+<?php
+
+
+
+/**
+ * Description of InputFilter
+ *
+ * @author sashi
+ */
+class InputFilter 
+{
+    public static function filter($userInput)
+    {
+        $inputData = false;
+        
+        if($userInput)
+        {
+          $inputData = $userInput;   
+        }
+        return true;
+    }
+}

@@ -1,0 +1,73 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of MemberLogIn
+ *
+ * @author sashi
+ */
+class MemberLogIn extends Page
+{
+    public function __construct()
+    {
+         parent::__construct();?>
+                 <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Buy</title>
+            <link rel="icon" href="images/favicon.ico">
+
+            <!-- Bootstrap core CSS -->
+            <link href="css/bootstrap.css" rel="stylesheet">
+
+
+            <!-- Custom styles for this template -->
+            <link href="css/Header.css" rel="stylesheet">
+            <link href="css/MemberLogIn.css" rel="stylesheet" type="text/css"/>
+            <link href="css/Footer.css" rel="stylesheet">
+        </head>
+<?php
+    }
+    
+    public function display()
+    {
+        $this->header->display();
+        $this->displayContent();
+        $this->footer->display();
+    }
+
+    public function displayContent()
+    {
+       ?>
+        
+        <div class="container">
+
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="Email" class="form-control" placeholder="User Name" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" required>
+       <!-- <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label> -->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+
+        
+     
+        
+        
+</html>
+    <?php
+
+    }
+
+//put your code here
+}
+

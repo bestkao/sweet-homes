@@ -1,0 +1,92 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of About
+ *
+ * @author sashi
+ */
+class About extends Page {
+    
+    public function __construct()
+    {
+        parent::__construct();
+?>
+<html>
+    <head>
+        <title>About Us</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/Header.css" rel="stylesheet" type="text/css"/>
+        <link href="css/Footer.css" rel="stylesheet"> 
+        <link href="css/About.css" rel="stylesheet" type="text/css"/>
+    </head>
+    
+    <?php
+    
+    }
+    public function display()
+    {
+        $this->header->display();
+        $this->displayContent();
+        $this->footer->display();
+        
+    }
+    
+    public function displayContent()
+    {?>
+    
+    
+        <div class="about">
+            <h2> About SweetHomes </h2>
+        <div class="form-message messge1" >
+            <textarea class="form-textarea  text1"></textarea>
+        </div>
+            
+            <div class="row">
+                
+                <div class="col-xs-4 col-md-2">
+                  <a href="#" class="thumbnail">
+                    <img src="Picture copy/picture1.JPG">
+                    <span class="label label-default">Title</span>
+                  </a>
+                </div>
+                
+                <div class="col-xs-4 col-md-2">
+                  <a href="#" class="thumbnail">
+                    <img src="Picture copy/picture1.JPG">
+                    <span class="label label-default">Title</span>
+                  </a>
+                </div>
+                
+                <div class="col-xs-4 col-md-2">
+                  <a href="#" class="thumbnail">
+                    <img src="Picture copy/picture1.JPG">
+                    <span class="label label-default">Title</span>
+                  </a>
+                </div>
+                
+                <div class="col-xs-4 col-md-2">
+                  <a href="#" class="thumbnail">
+                    <img src="Picture copy/picture1.JPG">
+                    <span class="label label-default">Title</span>
+                  </a>
+                </div>
+                
+ 
+</div>
+            </div>
+
+<?php
+        
+        
+    }
+
+//put your code here
+}

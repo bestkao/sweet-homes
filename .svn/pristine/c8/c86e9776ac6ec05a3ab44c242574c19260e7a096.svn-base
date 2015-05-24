@@ -1,0 +1,563 @@
+<?php
+
+/**
+ * This Model class represents a Property
+ * This class has the columns of the Property table statically mapped as attributes.
+ * So, if any number of columns are added or edited in the Property table in the Database
+ * then attributes in this class has to be added/modified manually.  Also update
+ * functions buildDataArray() and setAll().
+ *
+ * A new Property can be instantiated and attirbutes can be set using the setters.
+ * Then the new Property is saved to the database using the save() function.
+ * 
+ * And an exisiting Property can be retirived using the class method find($uniqueID)
+ * Similarly, existing Property is saved to the database after editing by using
+ * the save() function.
+ * 
+ * getAll() and getBySearch($whereClause) allow additional retrieval methods.  
+ * getAll() gets all propertis and getBySearch() allows retrieval by sql logic - 
+ * $whereClause must use sql syntax.
+ * 
+ * @author justina
+ */
+class Property implements Model
+{
+    /*Be sure when adding attributes to also add them in functions
+     * buildDataArray() and setAll()
+     * 
+     */
+
+    private $id;
+    private $realtorId;
+    private $propertyTypeId;
+    private $neighborhoodId;
+    private $address;
+    private $addressUnit;
+    private $zip;
+    private $state;
+    private $city;
+    private $descriptionLong;
+    private $descriptionShort;
+    private $price;
+    private $status;
+    private $bedrooms;
+    private $bathrooms;
+    private $sqft;
+    private $lotSize;
+    private $parkingSpaces;
+    private $yearBuilt;
+    private $dateListed;
+    private $hoaDues;
+    private $mlsNum;
+    private $walkScore;
+    private $priceSold;
+    private $dateSold;
+    private $hotProperty;
+    private $imageFilename;
+    private $thumbnailFilename;
+    private $thumbnailDir;
+    private $imageDir;
+    private $sold;
+    private $isNew;
+    private static $propertyDatabase = null;
+
+    public function __construct()
+    {
+        self::initPropertyDatabase();
+    }
+
+    public function getID()
+    {
+        return $this->id;
+    }
+
+    public function getRealtorId()
+    {
+        return $this->realtorId;
+    }
+
+    public function getPropertyTypeId()
+    {
+        return $this->propertyTypeId;
+    }
+
+    public function getNeighborhoodId()
+    {
+        return $this->neighborhoodId;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    public function getAddressUnit()
+    {
+        return $this->addressUnit;
+    }
+
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function getBedrooms()
+    {
+        return $this->bedrooms;
+    }
+
+    public function getBathrooms()
+    {
+        return $this->bathrooms;
+    }
+
+    public function getLongDescription()
+    {
+        return $this->descriptionLong;
+    }
+
+    public function getShortDescription()
+    {
+        return $this->descriptionShort;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getSqft()
+    {
+        return $this->sqft;
+    }
+
+    public function getLotSize()
+    {
+        return $this->lotSize;
+    }
+
+    public function getParkingSpaces()
+    {
+        return $this->parkingSpaces;
+    }
+
+    public function getYearBuilt()
+    {
+        return $this->yearBuilt;
+    }
+
+    public function getDateListed()
+    {
+        return $this->dateListed;
+    }
+
+    public function getHoaDues()
+    {
+        return $this->hoaDues;
+    }
+
+    public function getMlsNumber()
+    {
+        return $this->mlsNum;
+    }
+
+    public function getWalkScore()
+    {
+        return $this->walkScore;
+    }
+
+    public function getThumbnailFileName()
+    {
+        return $this->thumbnailFilename;
+    }
+
+    public function getImageFileName()
+    {
+        return $this->imageFilename;
+    }
+
+    public function getThumbnailDir()
+    {
+        return $this->thumbnailDir;
+    }
+
+    public function getImageDir()
+    {
+        return $this->imageDir;
+    }
+
+    public function getPriceSold()
+    {
+        return $this->priceSold;
+    }
+
+    public function getDateSold()
+    {
+        return $this->dateSold;
+    }
+
+    public function isHotProperty()
+    {
+        return $this->hotProperty;
+    }
+
+    public function isSold()
+    {
+        return $this->sold;
+    }
+
+    public function setID($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setRealtorId($id)
+    {
+        $this->realtorId = $id;
+    }
+
+    public function setPropertyTypeId($id)
+    {
+        $this->propertyTypeId = $id;
+    }
+
+    public function setNeighborhoodId($id)
+    {
+        $this->neighborhoodId = $id;
+    }
+
+    public function setAddress($addr)
+    {
+        $this->address = $addr;
+    }
+
+    public function setAddressUnit($addrU)
+    {
+        $this->addressUnit = $addrU;
+    }
+
+    public function setZip($zp)
+    {
+        $this->zip = $zp;
+    }
+
+    public function setState($st)
+    {
+        $this->state = $st;
+    }
+
+    public function setCity($ct)
+    {
+        $this->city = $ct;
+    }
+
+    public function setBedrooms($rooms)
+    {
+        $this->bedrooms = $rooms;
+    }
+
+    public function setBathrooms($rooms)
+    {
+        $this->bathrooms = $rooms;
+    }
+
+    public function setSqft($size)
+    {
+        $this->sqft = $size;
+    }
+
+    public function setLotSize($size)
+    {
+        $this->lotSize = $size;
+    }
+
+    public function setParkingSpaces($space)
+    {
+        $this->parkingSpaces = $space;
+    }
+
+    public function setYearBuilt($year)
+    {
+        $this->yearBuilt = $year;
+    }
+
+    //Shoouldn't date be automated via mysql
+    /* public function setDateListed($rooms)
+      {
+      $this->bedrooms = $rooms;
+      } */
+
+    public function setHoaDues($hd)
+    {
+        $this->hoaDues = $hd;
+    }
+
+    public function setMlsNumber($num)
+    {
+        $this->mlsNum = $num;
+    }
+
+    public function setWalkScore($score)
+    {
+        $this->walkScore = $score;
+    }
+
+    public function setLongDescription($ld)
+    {
+        $this->descriptionLong = $ld;
+    }
+
+    public function setShortDescription($sd)
+    {
+        $this->descriptionShort = $sd;
+    }
+
+    public function setPrice($prc)
+    {
+        $this->price = $prc;
+    }
+
+    public function setThumbnailFileName($flname)
+    {
+        $this->thumbnailFilename = $flname;
+    }
+
+    public function setImageFileName($flname)
+    {
+        $this->imageFilename = $flname;
+    }
+
+    public function setIsNew($new)
+    {
+        $this->isNew = $new;
+    }
+
+    public function setThumbnailDir($thumbnailDir)
+    {
+        $this->thumbnailDir = $thumbnailDir;
+    }
+
+    public function setImageDir($imageDir)
+    {
+        $this->imageDir = $imageDir;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function setPriceSold($priceSold)
+    {
+        $this->priceSold = $priceSold;
+    }
+
+    public function setDateSold($dateSold)
+    {
+        $this->dateSold = $dateSold;
+    }
+
+    public function setHotProperty($hotProperty)
+    {
+        $this->hotProperty = $hotProperty;
+    }
+
+    /**
+     * Save this object to the Database
+     */
+    public function save()
+    {
+        if ($this->isNew) {
+            //add new
+            $data = $this->buildDataArray();
+            self::$propertyDatabase->add($data);
+            $this->isNew = false;
+        } else {
+            //edit
+            $data = $this->buildDataArray();
+            self::$propertyDatabase->edit($data);
+        }
+    }
+
+    /**
+     * Remove this object from the Database
+     */
+    public function remove()
+    {
+        self::$propertyDatabase->remove($this->id);
+    }
+
+    public function setAll(array $row)
+    {
+        $this->setID($row['id']);
+        $this->setRealtorId($row['realtorId']);
+        $this->setPropertyTypeId($row['propertyTypeId']);
+        $this->setNeighborhoodId($row['neighbourhoodId']);
+        $this->setAddress($row['address']);
+        $this->setAddressUnit($row['addressUnit']);
+        $this->setZip($row['zip']);
+        $this->setState($row['state']);
+        $this->setCity($row['city']);
+        $this->setBedrooms($row['bedrooms']);
+        $this->setBathrooms($row['bathrooms']);
+        $this->setSqft($row['sqft']);
+        $this->setLotSize($row['lotSize']);
+        $this->setParkingSpaces($row['parkingSpaces']);
+        $this->setYearBuilt($row['yearBuilt']);
+        $this->setHoaDues($row['hoaDues']);
+        $this->setMlsNumber($row['mlsNum']);
+        $this->setWalkScore($row['walkScore']);
+        $this->setLongDescription($row['descriptionLong']);
+        $this->setShortDescription($row['descriptionShort']);
+        $this->setPrice($row['price']);
+        $this->setThumbnailFileName($row['thumbnailFilename']);
+        $this->setImageFileName($row['imageFileName']);
+
+        $this->setThumbnailDir($row['thumbnailDir']);
+        $this->setImageDir($row['imageDir']);
+        $this->setStatus($row['status']);
+        $this->setPriceSold($row['priceSold']);
+        $this->setDateSold($row['dateSold']);
+        $this->setHotProperty($row['hotProperty']);
+    }
+
+    public function buildDataArray()
+    {
+
+        $data = array(
+            "id" => $this->id,
+            "realtorId" => $this->realtorId,
+            "propertyTypeId" => $this->propertyTypeId,
+            "neighborhoodId" => $this->neighborhoodId,
+            "address" => $this->address,
+            "addressUnit" => $this->addressUnit,
+            "zip" => $this->zip,
+            "state" => $this->state,
+            "city" => $this->city,
+            "bedrooms" => $this->bedrooms,
+            "bathrooms" => $this->bathrooms,
+            "sqft" => $this->sqft,
+            "lotSize" => $this->lotSize,
+            "parkingSpaces" => $this->parkingSpaces,
+            "yearBuilt" => $this->yearBuilt,
+            "dateListed" => $this->dateListed,
+            "hoaDues" => $this->hoaDues,
+            "mlsNum" => $this->mlsNum,
+            "walkScore" => $this->walkScore,
+            "descriptionShort" => $this->descriptionShort,
+            "descriptionLong" => $this->descriptionLong,
+            "price" => $this->price,
+            "thumbnailFilename" => $this->thumbnailFilename,
+            "imageFilename" => $this->imageFilename,
+            "thumbnailDir" => $this->thumbnailDir,
+            "imageDir" => $this->imageDir,
+            "status" => $this->status,
+            "dateSold" => $this->dateSold,
+            "hotProperty=> $this->hotProperty",
+        );
+        return $data;
+    }
+
+    public static function find($uniqueID)
+    {
+        self::initPropertyDatabase();
+        $property = null;
+        $whereClause = "id = ".$uniqueID;
+        $data = self::$propertyDatabase->getBySearch($whereClause);
+        if($data)$data = $data->fetch_assoc();
+        
+        if (is_array($data)) {
+            $property = new Property();
+            $property->setAll($data);
+            $property->setIsNew(false);
+        }
+        //extract the row with given ID from Database
+        //if found create a Property object with the retrieved attributes
+        //then set the isNew of that object to false
+        //return the object
+        return $property;
+    }
+
+    /**
+     * Returns an array of all the available Property objects from the Database
+     * Or if there are no available records then returns null.
+     */
+    public static function getAll()
+    {
+        self::initPropertyDatabase();
+        $properties = null;
+
+        $list = self::$propertyDatabase->get();
+        $num_results = $list->num_rows;
+
+        if ($num_results > 0) {
+            $properties = array($num_results);
+
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $list->fetch_assoc();
+
+                $properties[$i] = new Property();
+                $properties[$i]->setAll($row);
+            }
+        }
+        return $properties;
+    }
+
+    /**
+     * 
+     * @param type $whereClause is the search criteria by which matchin properties will
+     *  be selected
+     * @return array of Property objects matching the search keyu if found 
+     * or else null
+     */
+    public static function getBySearch($whereClause)
+    {
+        self::initPropertyDatabase();
+        $properties = null;
+
+        $list = self::$propertyDatabase->getBySearch($whereClause);
+
+        if (!is_null($list) && isset($list)) {
+
+
+            $num_results = $list->num_rows;
+
+
+            if ($num_results > 0) {
+                $properties = array($num_results);
+
+                for ($i = 0; $i < $num_results; $i++) {
+                    $row = $list->fetch_assoc();
+
+                    $properties[$i] = new Property();
+                    $properties[$i]->setAll($row);
+                }
+            }
+        }
+
+        return $properties;
+    }
+
+    private static function initPropertyDatabase()
+    {
+        if (is_null(self::$propertyDatabase)) {
+            self::$propertyDatabase = new ModelDatabase(
+                    new PropertyAdder("Property"),
+                    new PropertyRemover("Property"),
+                    new PropertyEditor("Property"),
+                    new PropertyGetter("Property")
+            );
+        }
+    }
+
+}

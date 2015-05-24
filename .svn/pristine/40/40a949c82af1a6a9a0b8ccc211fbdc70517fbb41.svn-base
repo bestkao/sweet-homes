@@ -1,0 +1,47 @@
+
+
+.footer, .push {
+    position:absolute;
+    top:117%;
+    height: 35px;
+    width: 100%;
+    background-color:windowframe;
+  
+    /* .push must be the same height as .footer */
+
+   
+    
+    
+}
+
+.footer .RealtorLogIn {
+   position: relative;
+   top:10px;
+   padding-left: 3%;
+}
+
+.footer .AdminLogIn {
+   position: relative;
+   top:10px;
+   padding-left: 5%;
+}
+
+
+
+
+@media(max-width:768px) { 
+    .about .messge1 .text1 {
+    width: 95%;
+   //height: 145px;
+}
+  
+.footer {
+    position: absolute;
+    //top:50px;;
+    //height: 205px;
+    background-color:windowframe;
+ 
+    
+}
+
+}

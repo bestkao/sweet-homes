@@ -1,0 +1,194 @@
+<?php
+
+//include_once('Page.php');
+
+class Sell extends Page {
+
+    public function __construct() {
+        parent::__construct();
+        ?>
+        <html>
+            <head>
+                <title>Sell</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+                <link rel="icon" href="images/favicon.ico">
+                <!-- Custom styles for this template -->
+                <link href="css/Header.css" rel="stylesheet">
+                <link href="css/Sell.css" rel="stylesheet">
+                <link href="css/Footer.css" rel="stylesheet">
+            </head>
+            <?php
+        }
+
+        public function display() {
+            $this->header->display();
+            $this->displayContent();
+            $this->footer->display();
+            $this->dropDownScript();
+        }
+
+        public function displayContent() {
+            ?>
+
+            <body> 
+
+
+                <div class="Sell">
+
+                    <br/><br/><br/><br/><br/>
+                    <div class="title">
+                        <p><b>Selling Your Property</b></p>
+                    </div>   
+
+                    <div class="jumbotron">
+                        <h2>Instructions On How to Sell Your Property</h2>
+                        <p>1) To sell your property, click on the Realtors link, located above.</p>
+                        <p>2) Once you're on the page with the list of realtors,
+                            click the contact button to get in touch with any realtor. From there
+                            you can send an email to any realtor to notify them, that you want to
+                            sell your property.
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Sold Home Properties -->
+                <div class="container-fluid HotProperty">
+                    <h1> RECENTLY SOLD HOMES </h1>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1" style="position:relative;">
+                            <div class="col-md-4">
+                                <div  class="thumbnail">
+                                    <img src="images/properties_full/picture1.JPG">
+                                    <div class="text">
+                                        <p>
+                                            1160 Mission St UNIT 1707<br>
+                                            San Francisco, CA 94103<br>
+                                            Date Sold:11/2/2014<br>
+                                            Price: $705,000<br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="images/properties_full/picture2.JPG">
+                                    <div class="text">
+                                        <p>
+                                            260 King St UNIT 669<br>
+                                            San Francisco, CA 94107<br>
+                                            Date Sold:11/9/2014<br>
+                                            Price: $805,000<br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="images/properties_full/picture3.JPG">
+                                    <div class="text">
+                                        <p>
+                                            666 Madrid St<br>
+                                            San Francisco, CA 94112<br>
+                                            Date Sold:11/5/2014<br>
+                                            Price: $905,000<br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!--
+            <body>
+            <div class="Sell">
+                <div class="jumbotron">
+                    <h2>Instructions On How to Sell Your Property</h2>
+                    <p>1) To sell your property, click on the Realtors link, located above.</p>
+                    <p>2) Once you're on the page with the list of realtors,
+                        click the contact button to get in touch with any realtor. From there
+                        you can send an email to any realtor to notify them, that you want to
+                        sell your property.
+                    </p>
+                </div>
+            </div> -->
+
+
+
+
+
+
+
+                <!--<div class="Sell">
+                    <div class="jumbotron">
+                        <form action="sell.php" method="post" enctype="multipart/form-data" >
+                            <table border=0>
+
+                                <tr>
+                                    <td>Address</td>
+                                    <td align=left><input type="text" name="address" size=30 maxlength=40></td>
+                                </tr>
+                                <tr>
+                                    <td>Address Unit</td>
+                                    <td align=left><input type="text" name="addressUnit" size=10 maxlength=10></td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td align=left><input type="text" name="city" size=15 maxlength=20></td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td ><input type="text" name="state" size=2 maxlength=2></td>
+                                </tr>
+                                <tr>
+                                    <td>Zip</td>
+                                    <td ><input type="text" name="zip" size=10 maxlength=8></td>
+                                </tr>
+                                <tr>
+                                    <td>Description Short</td>
+                                    <td ><input type="text" name="descriptionShort" size=40 maxlength=100></td>
+                                </tr>
+                                <tr>
+                                    <td>Description Long</td>
+                                    <td ><input type="text" name="descriptionLong" size="100"</td>
+                                </tr>
+                                <tr>
+                                    <td>Select image to upload:
+                                        <input type="file" name="fileToUpload"  id="fileToUpload">
+                                       <!-- <input type="submit" value="Upload Image" name="submit"></td>-->
+                <!-- </tr>
+                 <tr>
+                     <td colspan=2 ><input type=submit value="Add" name="Add"></td>
+                 </tr>
+             </table>
+         </form>
+         </div>
+        </div>-->
+                <!-- Bootstrap core JavaScript
+                ================================================== -->
+                <!-- Placed at the end of the document so the pages load faster -->
+
+            </body>
+        </html>
+        <?php
+    }
+
+//put your code here
+}

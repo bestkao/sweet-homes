@@ -1,0 +1,7 @@
+<?php
+require_once("SweetHomeAutoloader.php");
+
+$listing = new PropertyListing();
+$listing->setWhereClause("city='Oakland'");
+$listing->displayListing();
+

@@ -1,0 +1,56 @@
+.firstbutton{
+    padding: 12px 100px;
+    margin-top: 20px;
+    margin-left: 35%;
+
+}
+
+.newtable {
+    position: relative;
+    top: 10px;
+    padding-left: 2%;
+}
+
+.newtable .table >tbody .check1{
+    width: 20px;
+
+}
+
+.newtable .table >tbody .checkbox1{
+    margin-left: 200px;
+
+}
+
+.tab-content .active .newtable .table >tbody .proplist{
+
+    height: 57px;
+    width: 350px;
+
+}
+
+.tab-content .active .newtable .table >tbody .txt1{
+
+    height: 57px;
+    width: 300px;
+
+}
+
+.newtable .table >tbody .btn1{
+    margin-left: 55%;
+
+}
+
+.newtable .table >tbody .but1{
+    margin-left: 65%;
+
+}
+.newtable .fourthbutton{
+    position: relative;
+    margin-left: 80%;
+    margin-bottom: 15px;
+
+}
+
+.footer{
+    background-color: gray;
+}

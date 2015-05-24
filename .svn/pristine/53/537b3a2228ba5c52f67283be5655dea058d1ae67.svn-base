@@ -1,0 +1,227 @@
+<?php
+
+
+/**
+ * This is a PropertyPreference model class.
+ * This is a special class to represent a Member's Property Preference.
+ * @author sashi 
+ */
+class PropertyPreference implements Model
+{
+    private $city, $zip, $price, $neighborhood, $bedrooms, $bathrooms, $member_id;
+    private $id;
+    private static $propertyPreferenceDatabase;
+    private $isNew;
+    
+    public function __construct()
+    {   
+        $this->isNew=true;
+        self::initPropertyPreferenceDatabase();
+        //$this->wishlist = new WishList();   jtc-wishlist table?
+    }
+    
+    public function getCity()
+    {
+       return $this->city; 
+    }
+    
+    public function getZip()
+    {
+       return $this->zip; 
+    }
+    
+    public function getPrice()
+    {
+       return $this->price; 
+    }
+    
+    public function getNeighborhood()
+    {
+       return $this->neighborhood; 
+    }
+    
+    public function getBedrooms()
+    {
+       return $this->bedrooms; 
+    }
+    
+    public function getBathrooms()
+    {
+       return $this->bathrooms; 
+    }
+    
+    public function getMemberId()
+    {
+       return $this->member_id; 
+    }   
+    
+    public function getId()
+    {
+       return $this->id; 
+    }  
+    
+    public function getIsNew() 
+    {
+       return $this->isNew;
+    }
+
+    public function setCity($value)
+    {
+       return $this->city=$value; 
+    }
+    
+    public function setZip($value)
+    {
+       return $this->zip=$value; 
+    }
+    
+    public function setPrice($value)
+    {
+       return $this->price=$value; 
+    }
+    
+    public function setNeighborhood($value)
+    {
+       return $this->neighborhood=$value; 
+    }
+    
+    public function setBedrooms($value)
+    {
+       return $this->bedrooms=$value; 
+    }
+    
+    public function setBathrooms($value)
+    {
+       return $this->bathrooms=$value; 
+    }
+    
+    public function setMemberId($value)
+    {
+       return $this->member_id=$value; 
+    }   
+
+    
+    
+    
+    public function buildDataArray()
+    {
+        $data = array();
+        
+        if(isset($this->bathrooms))$data['Bathrooms']=  $this->bathrooms;
+        if(isset($this->bedrooms))$data['Bedrooms']=  $this->bedrooms;
+        if(isset($this->city))$data['City']=  $this->city;
+        if(isset($this->zip))$data['Zip']=  $this->zip;
+        if(isset($this->price))$data['Price']=  $this->price;
+        if(isset($this->neighborhood))$data['Neighbourhood']=  $this->neighborhood;
+        if(isset($this->member_id))$data['member_id']=  $this->member_id;
+        if(isset($this->id))$data['id']=  $this->id;
+        return $data;
+    }
+
+    public function remove() 
+    {
+        if(!$this->isNew){
+            self::$propertyPreferenceDatabase->remove($this->id);
+        }
+    }
+
+    public function save() 
+    {
+        echo '<p>Starting Save</p>';
+        
+        if ($this->isNew) {
+            //add new
+            echo '<h1>Saving<h1>';
+            $data = $this->buildDataArray();
+            self::$propertyPreferenceDatabase->add($data);
+            $this->isNew = false;
+        } else {
+            //edit
+            $data = $this->buildDataArray();
+            self::$propertyPreferenceDatabase->edit($data);
+        }
+        
+    }
+
+    public function setAll(array $data)
+    {
+        if(isset($data['Bathrooms'])) $this->bathrooms=$data['Bathrooms'];
+        if(isset($data['Bedrooms'])) $this->bedrooms=$data['Bedrooms'];
+        if(isset($data['City'])) $this->city=$data['City'];
+        if(isset($data['Neighbourhood'])) $this->neighborhood=$data['Neighbourhood'];
+        if(isset($data['Zip'])) $this->zip=$data['Zip'];
+        if(isset($data['Price'])) $this->price=$data['Price'];
+        if(isset($data['member_id'])) $this->member_id=$data['member_id'];
+        if(isset($data['id'])) $this->id=$data['id'];
+        
+        
+    }
+
+    public static function find($uniqueID) 
+    {
+        self::initPropertyPreferenceDatabase();
+        
+        $propertyPreference = null;
+        $whereClause = "id = ".$uniqueID;
+        $data = self::$propertyPreferenceDatabase->getBySearch($whereClause);
+        
+        if($data)$data = $data->fetch_assoc();
+
+        if (is_array($data)) {
+            $propertyPreference = new Property();
+            $propertyPreference->setAll($data);
+            $propertyPreference->setIsNew(false);
+        }
+        //extract the row with given ID from Database
+        //if found create a Property object with the retrieved attributes
+        //then set the isNew of that object to false
+        //return the object
+        return $propertyPreference;    
+        
+    }
+
+    public static function getAll() 
+    {
+        
+    }
+
+    public static function getBySearch($whereClause) 
+    {
+        self::initPropertyPreferenceDatabase();
+        $preferences = null;
+
+        $list = self::$propertyPreferenceDatabase->getBySearch($whereClause);
+        
+        if (!is_null($list) &&  $list!=false) {
+
+            $num_results = $list->num_rows;
+
+
+            if ($num_results > 0) {
+                $preferences = array($num_results);
+
+                for ($i = 0; $i < $num_results; $i++) {
+                    $row = $list->fetch_assoc();
+
+                    $preferences[$i] = new Property();
+                    $preferences[$i]->setAll($row);
+                    $preferences[$i]->setIsNew(false);
+                }
+            }
+        }
+
+        return $preferences;    
+    }
+    
+    private static function initPropertyPreferenceDatabase()
+    {
+        if(is_null(self::$propertyPreferenceDatabase))
+            self::$propertyPreferenceDatabase = new ModelDatabase(
+                 new PreferenceAdder('PropertyPreference'), 
+                    new PreferenceRemover('PropertyPreference'),
+                    new PreferenceEditor('PropertyPreference'), 
+                    new PreferenceGetter('PropertyPreference'));    
+        
+    }
+
+}

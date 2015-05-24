@@ -1,0 +1,77 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Nov 18, 2014, 11:27:33 AM
+    Author     : sashi
+*/
+
+.navibar {
+    position: absolute;
+    top:0%;
+    background-color:#269abc;
+    border-bottom-color: white;
+
+}
+
+
+
+.navibar .navbar-header .navbar-brand {
+    color:black;
+    padding-top:28px;
+    font-size: 18px;
+
+
+}
+
+
+.navibar .navbar-header {
+    /*padding-left: 54px;*/
+
+
+}
+
+
+.navibar .navlist .list a {
+    padding-top: 28px;
+    color:black;
+    font-size: 18px;
+    padding-bottom: 2px;
+
+
+}
+
+.navibar .navlist .logList a {
+    padding-top: 28px;
+    color:black;
+    font-size: 18px;
+    padding-bottom: 2px;
+
+}
+
+.navibar .navlist .logList {
+    padding-right: 12%;
+
+
+}
+
+.navibar .navlist .logList .dropdown .dropdown-menu {
+
+    background-color: #269abc;
+    border-color: white;
+
+}
+
+#classProject {
+
+    color:red;
+    text-align: right;
+    padding-right:10%;
+    position:absolute;
+    width: 100%;
+    background-color: white;
+    margin-left: 52%;
+
+}

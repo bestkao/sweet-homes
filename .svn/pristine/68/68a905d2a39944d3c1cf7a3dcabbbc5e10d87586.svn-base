@@ -1,0 +1,150 @@
+
+
+
+
+.searchmiddle {
+    padding-top: 284px;
+    margin-left: 303px;
+} 
+
+.searchmiddle .row .col-sm-2  {
+    margin-right: -46px;
+    padding-top: 13px;
+}
+.searchmiddle .row .col-sm-2 .dropbtn  {
+    height: 44px;
+    font-size: 18px;
+    color:black;
+}
+
+
+.searchmiddle .row .searchbar11 .col-sm-1 {
+   margin-left: -33px;
+   
+}
+.searchmiddle .row .searchbar11 .col-sm-1 button {
+   height: 44px;
+   width: 124px;
+   font-size: 18px;
+   color:white;
+   margin-left: -123px;
+   
+   
+}
+
+.searchmiddle .row .searchbar11 .col-sm-6 .SearchBox {
+    height: 44px;
+    font-size: 18px;
+    color:black;
+    width: 431px;
+}
+
+
+
+
+
+
+
+.caroText {
+    
+    position: absolute;
+    top:21%;
+   text-align: center;
+    margin-left: 30%;
+}
+
+
+
+
+
+
+.HotProperty {
+    position:absolute;
+    top:88%;
+    margin-left: 123px;
+    
+   
+}
+
+.HotProperty h1 {
+    color: red;
+    
+    margin-left: 333px;
+}
+.HotProperty .row .text .text1 {
+    width:100%;
+    background-color:whitesmoke;
+    height: 93px;
+    font-size: 18px;
+    text-align: center;
+    color:black;
+}
+
+.HotProperty .row .col-sm-3 img {
+    height: 154px;
+}
+
+.HotProperty .row .col-sm-3 .text .text1 {
+    height: 104px;
+}
+
+
+.footer {
+    position:absolute;
+    top:151%;
+    height: 135px;
+    width: 100%;
+    background-color:windowframe;
+
+
+}
+
+
+
+/*
+
+   @media (max-width:950px ) 
+{
+    
+  .caroText {
+    
+    position: absolute;
+    top:122px;
+    text-align: center;
+    margin-left: 2px;
+    
+}  
+    .searchmiddle {
+    padding-top: 334px;
+    margin-left: 3px;
+} 
+
+.HotProperty {
+    position:absolute;
+    top:85%;
+    margin-left:3px;
+    
+   
+}
+
+.HotProperty .row .col-sm-3 {
+    width: 403px;
+       
+}
+
+.HotProperty h1 {
+font-size: 25px;
+  margin-left: 12px;
+}
+
+
+.searchmiddle .row .searchbar11 .col-sm-1 button {
+   margin-left: 33px;
+   
+   
+}
+
+}
+
+
+*/

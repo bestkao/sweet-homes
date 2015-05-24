@@ -1,0 +1,60 @@
+<?php
+
+//include_once('Page.php');
+
+
+class Sell extends Page {
+
+    public function __construct() {
+        parent::__construct();
+        ?>
+        <html>
+            <head>
+                <title>Sell</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+
+                <!-- Custom styles for this template -->
+                <link href="css/Header.css" rel="stylesheet">
+               
+               <link href="css/Sell.css" rel="stylesheet">
+               <link href="css/Footer.css" rel="stylesheet">
+            </head>
+        <?php
+    }
+
+    public function display() {
+        $this->header->display();
+        $this->displayContent();
+        $this->footer->display();
+    }
+
+    public function displayContent() {
+        ?>
+            <div class="Sell">
+                <div class="jumbotron">
+                    <h2>Instructions On How to Sell Your Property</h2>
+                    <p>1) To sell your property, click on the Realtors link, located above.</p>
+                    <p>2) Once you're on the page with the list of realtors, 
+                        click the contact button to get in touch with any realtor. From there
+                        you can send an email to any realtor to notify them, that you want to 
+                        sell your property.
+                    </p>
+                </div>   
+
+            </div>   
+
+        </body>
+
+
+        </html>
+        <?php
+    }
+
+//put your code here
+}

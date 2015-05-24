@@ -1,0 +1,265 @@
+#buy {
+         font-style: oblique;
+    font-weight: bolder;
+    color: whitesmoke;
+}
+
+
+<<<<<<< .mine
+.description {
+    position: absolute;
+    top:20%;
+    padding-left: 5%;
+}
+
+.description h2 {
+    padding-left:2%;
+}
+.description .container .row .lef .lab1 {
+    width:100%;
+    height: 75%;
+
+}
+=======
+>>>>>>> .r188
+
+
+/**** BASE ****/
+body {
+    color: #888;   
+}
+a {
+    color: #03a1d1;
+    text-decoration: none!important;
+}
+
+<<<<<<< .mine
+.ContactUs .form-horizontal-main .form-group .Searchoptions  .save2 {
+
+=======
+/**** LAYOUT ****/
+.list-inline>li {
+    padding: 0 10px 0 0;
+>>>>>>> .r188
+}
+.container-pad {
+    padding: 30px 15px;
+}
+
+
+<<<<<<< .mine
+.ContactUs .form-horizontal-main .form-group .Searchoptions .lab1 {
+    width: 73%;
+    height: 34px;
+
+=======
+/**** MODULE ****/
+.bgc-fff {
+    background-color: #fff!important;
+>>>>>>> .r188
+}
+.box-shad {
+    -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+}
+<<<<<<< .mine
+
+.RealtorListing .row .realtorpic1 .img {
+    width: 73%;
+    height: 65px;
+}
+
+.RealtorListing .row .realtortext1 .textarea1 {
+    width: 100%;
+    height: 65px;
+}
+
+.RealtorListing .row .realtortext1 .but1 {
+    position: relative;
+    top:13px;
+
+
+}
+
+.RealtorListing .row .realtortext1 .rev1 {
+    float:right;
+
+=======
+.brdr {
+    border: 1px solid #ededed;
+>>>>>>> .r188
+}
+
+<<<<<<< .mine
+.RealtorListing .row .realtortext1 .cont1 {
+    float:right;
+    margin-left: 13px;
+
+=======
+/* Font changes */
+.fnt-smaller {
+    font-size: .9em;
+>>>>>>> .r188
+}
+.fnt-lighter {
+    color: #bbb;
+}
+
+/* Padding - Margins */
+.pad-10 {
+    padding: 10px!important;
+}
+.mrg-0 {
+    margin: 0!important;
+}
+.btm-mrg-10 {
+    margin-bottom: 10px!important;
+}
+<<<<<<< .mine
+
+.HotProperty .row img {
+    height: 114px;
+    width:100%
+
+=======
+.btm-mrg-20 {
+   // margin-bottom: 20px!important;
+>>>>>>> .r188
+}
+
+/* Color  */
+.clr-535353 {
+    color: #535353;
+}
+
+
+
+
+<<<<<<< .mine
+@media(max-width:768px) {
+
+
+
+
+.ContactUs .form-horizontal h2 {
+        font-size: 21px;
+        padding-left: 0px;
+
+=======
+/**** MEDIA QUERIES ****/
+@media only screen and (max-width: 991px) {
+    #property-listings .property-listing {
+        padding: 5px!important;
+>>>>>>> .r188
+    }
+<<<<<<< .mine
+
+
+
+    .ContactUs {
+    position: relative;
+    top:13px;
+    padding-left:35px;
+}
+    .ContactUs .form-horizontal-main .form-group .form-control {
+        width: 76%;
+=======
+    #property-listings .property-listing a {
+        margin: 0;
+>>>>>>> .r188
+    }
+<<<<<<< .mine
+
+
+    .ContactUs .form-horizontal-main .form-group .col-sm-7 {
+        width:72%;
+
+=======
+    #property-listings .property-listing .media-body {
+        padding: 10px;
+>>>>>>> .r188
+    }
+}
+
+<<<<<<< .mine
+     .ContactUs .form-horizontal-main .form-group .col-sm-7 .save2 {
+        width:162px;
+
+    }
+
+
+    .ContactUs .form-horizontal-main .form-group .col-sm-2 {
+        position: relative;
+        top:4px;
+
+
+=======
+@media only screen and (min-width: 992px) {
+    #property-listings .property-listing img {
+        max-width: 180px;
+>>>>>>> .r188
+    }
+<<<<<<< .mine
+
+    .ContactUs .form-horizontal-main .form-group .form-savesearch .save1 {
+        width:93px;
+        position: relative;
+        top:1px;
+
+
+
+    }
+
+    .newtable {
+        position: relative;
+        top:37px;
+        padding-left: 12px;
+    }
+
+
+
+
+
+.newtable .table >tbody .im1 {
+    height: 125px;
+    width: 225px;
+}
+
+.newtable .table >tbody .txt1 {
+    height: 128px;
+    width: 425px;
+}
+
+
+.newtable .table >tbody .image1 {
+    height: 100%;
+    width: 100%;
+}
+
+.newtable .table >tbody .textarea1 {
+    height: 100%;
+    width: 100%;
+
+
+}
+
+.newtable .table >tbody .secondbutton {
+  position: relative;
+  top:33px;
+  padding-right: 32px;
+=======
+>>>>>>> .r188
+}
+//brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing
+
+
+
+
+
+
+<<<<<<< .mine
+}
+=======
+
+
+>>>>>>> .r188

@@ -1,0 +1,19 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+.about{
+    position: relative;
+}
+
+.about .title{
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 30px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.about .jumbotron .paragraph1{
+    margin:25px;
+}
+
+.about .jumbotron .paragraph2{
+    margin:25px;
+}

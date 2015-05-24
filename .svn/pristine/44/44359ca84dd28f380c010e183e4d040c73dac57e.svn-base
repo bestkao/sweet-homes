@@ -1,0 +1,199 @@
+<?php
+require_once("SweetHomeAutoloader.php");
+
+session_start();
+
+if (isset($_SESSION['realtor_id'])) {
+    
+    $addData = 0;
+    $data = array();
+    $error_message = "none";
+    
+    $data['realtorId']= $_SESSION['realtor_id'];
+    
+    if (isset($_POST['address']) && empty($_POST['address'])==false) {
+        echo "<p>address</p>";
+        $data['address']= InputFilter::filter($_POST['address']);
+        $addData++;
+    }
+
+
+    if (isset($_POST['addressUnit']) && empty($_POST['addressUnit'])==false) {
+        echo "<p>addressUnit</p>";
+        if(is_int($_POST['addressUnit'])){
+        $data['addressUnit']= $_POST['addressUnit'];
+         $addData++;
+        }
+        else{
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['city']) && empty($_POST['city'])==false) {
+        echo "<p>city</p>";
+        $data['city']= InputFilter::filter($_POST['city']);
+         $addData++;
+    }
+
+    if (isset($_POST['zip']) && empty($_POST['zip'])==false) {
+        echo "<p>zip</p>";
+        if(InputFilter::isInteger($_POST['zip'])){
+        $data['zip']= $_POST['zip'];
+        $addData++;
+        
+        }
+        else {
+           //send error message here 
+        }
+    }
+
+    if (isset($_POST['price']) && empty($_POST['price'])==false) {
+        echo "<p>price</p>";
+        if(is_numeric($_POST['price'])){
+        $data['price']= $_POST['price'];
+         $addData++;
+        }
+        else {
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['bathrooms']) && empty($_POST['bathrooms'])==false) {
+        echo "<p>bathrooms</p>";
+        if(InputFilter::isInteger($_POST['bathrooms'])){
+        $data['bathrooms']= $_POST['bathrooms'];
+         $addData++;
+        }
+        else {
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['bedrooms']) && empty($_POST['bedrooms'])==false) {
+        echo "<p>bedrooms</p>";
+        if(InputFilter::isInteger($_POST['bedrooms'])){
+        $data['bedrooms']= $_POST['bedrooms'];
+         $addData++;
+        }
+        else{
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['sqft']) && empty($_POST['sqft'])==false) {
+        echo "<p>sqft</p>";
+        if(is_numeric($_POST['sqft'])){
+        $data['sqft']= $_POST['sqft'];
+         $addData++;
+        }
+        else {
+            //send error mesage here
+        }
+        
+    }
+
+    if (isset($_POST['lotSize']) && empty($_POST['lotSize'])==false) {
+        echo "<p>lotSize</p>";
+        if(is_numeric($_POST['lotSize'])){
+        $data['lotSIze']= $_POST['lotSize'];
+         $addData++;
+        }
+        else{
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['parkingSpaces']) && empty($_POST['parkingSpaces'])==false) {
+        echo "<p>parkingSpaces</p>";
+        if(InputFilter::isInteger($_POST['parkingSpaces'])){
+        $data['parkingSpaces']= $_POST['parkingSpaces'];
+         $addData++;
+        }
+        else{
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['yearBuilt']) && empty($_POST['yearBuilt'])==false) {
+        echo "<p>yearBuilt</p>";
+        if(InputFilter::isInteger($_POST['yearBuilt'])){
+        $data['yearBuilt']= $_POST['yearBuilt'];
+         $addData++;
+        }
+        else{
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['neighborhood']) && empty($_POST['neighborhood'])==false) {
+        echo "<p>neighborhood</p>";
+        $data['neighborhood']= InputFilter::filter($_POST['neighborhood']);
+         $addData++;
+    }
+
+    if (isset($_POST['descriptionShort']) && strlen($_POST['descriptionShort'])>2) {
+        echo "<p>descriptionShort</p>";
+        $data['descriptionShort']= InputFilter::filter($_POST['descriptionShort']);
+         $addData++;
+    }
+
+    if (isset($_POST['descriptionLong']) && strlen($_POST['descriptionLong'])>2) {
+        echo "<p>descriptionLong</p>";
+        $data['descriptionLong']= InputFilter::filter($_POST['descriptionLong']);
+         $addData++;
+    }
+    
+        if (isset($_POST['status']) && strlen($_POST['status'])>2) {
+        echo "<p>status</p>";
+        $data['status']= InputFilter::filter($_POST['status']);
+         $addData++;
+    }
+
+
+    $imageArray=array();
+    $j=0;
+    for ($i = 1; $i < 6; $i++) {
+
+        if (isset($_POST["add"])) {
+            echo '<p> Image post method caught!</p>';
+            //  echo '<p>'.$_POST['fileToUpload'.$i].'</p>';
+            if (is_uploaded_file($_FILES['fileToUpload' . $i]['tmp_name']) && getimagesize($_FILES["fileToUpload" . $i]["tmp_name"]) != false) {
+                // echo'<p>Entire image file caught</p>';
+                $upload_dir = "images/properties_full/";
+                $imageName = $_FILES["fileToUpload" . $i]["name"];
+                $upload_file = $upload_dir . basename($_FILES["fileToUpload" . $i]["name"]);
+
+                echo "<p>imagename=" . $imageName . "</p>";
+                echo "<p>upload_file=" . $upload_file . "</p>";
+                if (move_uploaded_file($_FILES["fileToUpload".$i]["tmp_name"], $upload_file)) {
+
+                    echo "The file " . basename($_FILES["fileToUpload".$i]["name"]) . " has been uploaded.";
+                    $imageArray[$j]= $imageName;
+                    $j++;
+                    
+                }
+                
+                
+                $addData++;
+            }
+        }
+    }
+
+    echo "<h1> addData= " . $addData . "</h1>";
+    if($addData>5){
+        
+        //set default values
+        $data['state']="CA";
+        $data['dateListed']=date('Y-m-d');
+        
+        $property = new Property();
+        
+        $property->setAll($data);
+        $property->setRealtorId($_SESSION['realtor_id']);
+        $property->setImages($imageArray);
+        $property->setThumbnailFileName($upload_file);
+        $property->save();
+        
+        header('Location: properties.php');
+    }
+}

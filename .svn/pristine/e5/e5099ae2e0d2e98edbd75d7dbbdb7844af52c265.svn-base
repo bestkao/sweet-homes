@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * This is a class Header that is responsible for displaying the top head part of a page
+ * including nav bars.
+ *
+ * @author sashi
+ */
+class Header
+{
+     public function __construct()
+     {
+
+     }
+     
+      public function display()
+     {//display fancy navbar here.
+         ?>
+
+      
+      
+        
+        <!-- Navigation Bar -->
+        <div class="container-fluid navbar navbar-default navbar-fixed-top navibar">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="index.php">HOME</a>
+            </div>  
+
+
+
+
+            <div class="collapse navbar-collapse navlist" id="myNavbar">
+                <ul class="nav navbar-nav list">
+                    <li><a id="buy" href="propertyList.php">BUY</a></li>
+                    <li><a id="sell" href="sell.php">SELL</a></li>
+                    <li><a id="realtor" href="realtors.php">REALTORS</a></li>
+                    <li><a id="about" href="about.php">ABOUT</a></li>
+                    <li><a id="contact" href="contact.php">CONTACT</a></li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right logList">
+
+
+                    <li><a id="signIn" href="signIn.php">SIGN UP</a></li>
+                    <li class ="dropdown">
+                        <a href ="#" class = "dropdown-toggle" data-toggle = "dropdown">SIGN IN<b class = "caret"></b></a>
+                        <ul class ="dropdown-menu">
+                            <li><a href ="memberLogIn.php">Member LogIn</a></li>
+                            <li><a href ="realtorLogIn.php">Realtor LogIn</a></li>
+                            <li><a href ="adminLogIn.php">Admin LogIn</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+
+            </div>
+        </div>
+
+
+
+    
+        
+             <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+
+<?php
+     }
+}

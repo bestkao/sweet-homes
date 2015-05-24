@@ -1,0 +1,143 @@
+<?php
+
+require_once("SweetHomeAutoloader.php");
+
+session_start();
+
+echo '<p>here</p>';
+if (isset($_SESSION['realtor_id']) && isset($_GET['id'])) {
+    echo '<p>session caught</p>';
+    echo '<p>Caught eaquals caser</p>';
+    $count = 0;
+    $data = array();
+    $properties = new Properties();
+
+    if (isset($_POST['address']) && (strlen($_POST['address']) > 2)) {
+        $count++;
+        $data['address'] = InputFilter::filter($_POST['address']);
+    }
+
+    if (isset($_POST['addressUnit']) && (strlen($_POST['addressUnit']) >= 1)) {
+        $count++;
+
+        $data['addressUnit'] = InputFilter::filter($_POST['addressUnit']);
+    }
+
+    if (isset($_POST['city']) && (strlen($_POST['city']) > 2)) {
+        $count++;
+        $data['city'] = InputFilter::filter($_POST['city']);
+    }
+
+    if (isset($_POST['zip']) && (strlen($_POST['zip']) > 2)) {
+        $count++;
+        if (InputFilter::isInteger($_POST['zip'])) {
+            $data['zip'] = $_POST['zip'];
+        }
+    }
+    if (isset($_POST['status']) && (strlen($_POST['status']) > 2)) {
+        $count++;
+        $data['status'] = InputFilter::filter($_POST['status']);
+    }
+    if (isset($_POST['price']) && (strlen($_POST['price']) > 2)) {
+        $count++;
+        $data['price'] = InputFilter::filter($_POST['price']);
+    }
+
+    if (isset($_POST['bathrooms']) && empty($_POST['bathrooms']) == false) {
+        echo "<p>bathrooms</p>";
+        if (InputFilter::isInteger($_POST['bathrooms'])) {
+            $data['bathrooms'] = $_POST['bathrooms'];
+            $count++;
+        } else {
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['bedrooms']) && empty($_POST['bedrooms']) == false) {
+        echo "<p>bedrooms</p>";
+        if (InputFilter::isInteger($_POST['bedrooms'])) {
+            $data['bedrooms'] = $_POST['bedrooms'];
+            $count++;
+        } else {
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['sqft']) && empty($_POST['sqft']) == false) {
+        echo "<p>sqft</p>";
+        if (is_numeric($_POST['sqft'])) {
+            $data['sqft'] = $_POST['sqft'];
+            $count++;
+        } else {
+            //send error mesage here
+        }
+    }
+
+    if (isset($_POST['lotSize']) && empty($_POST['lotSize']) == false) {
+        echo "<p>lotSize</p>";
+        if (is_numeric($_POST['lotSize'])) {
+            $data['lotSIze'] = $_POST['lotSize'];
+            $count++;
+        } else {
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['parkingSpaces']) && empty($_POST['parkingSpaces']) == false) {
+        echo "<p>parkingSpaces</p>";
+        if (InputFilter::isInteger($_POST['parkingSpaces'])) {
+            $data['parkingSpaces'] = $_POST['parkingSpaces'];
+            $count++;
+        } else {
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['yearBuilt']) && empty($_POST['yearBuilt']) == false) {
+        echo "<p>yearBuilt</p>";
+        if (InputFilter::isInteger($_POST['yearBuilt'])) {
+            $data['yearBuilt'] = $_POST['yearBuilt'];
+            $count++;
+        } else {
+            //send error message here
+        }
+    }
+
+    if (isset($_POST['neighborhood']) && empty($_POST['neighborhood']) == false) {
+        echo "<p>neighborhood</p>";
+        $data['neighborhood'] = InputFilter::filter($_POST['neighborhood']);
+        $count++;
+    }
+
+    if (isset($_POST['descriptionShort']) && strlen($_POST['descriptionShort']) > 2) {
+        echo "<p>descriptionShort</p>";
+        $data['descriptionShort'] = InputFilter::filter($_POST['descriptionShort']);
+        $count++;
+    }
+
+    if (isset($_POST['descriptionLong']) && strlen($_POST['descriptionLong']) > 2) {
+        echo "<p>descriptionLong</p>";
+        $data['descriptionLong'] = InputFilter::filter($_POST['descriptionLong']);
+        $count++;
+    }
+
+    if ($count > 0) {
+
+        $property = Property::find(InputFilter::filter($_GET['id']));
+        $editProp = new Property();
+        $editProp->setID($property->getID());
+        $editProp->setIsNew(false);
+        $editProp->setAll($data);
+        $editProp->save();
+
+        $properties->setProperties(Property::whereRealtorId($_SESSION['realtor_id']));
+
+        $properties->display();
+    } else {
+        //$_GET['ed']= $_GET['id'];
+        //$properties->display();
+        $properties->setEditProperty(Property::find(InputFilter::filter($_GET['id'])));
+        $properties->display();
+    }
+}
+

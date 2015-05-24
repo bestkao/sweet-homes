@@ -1,0 +1,318 @@
+<?php
+//include_once('Page.php');
+//include_once('models/ModelDatabase.php');
+//include_once('models/PropertyAdder.php');
+//include_once('models/PropertyRemover.php');
+//include_once('models/PropertyEditor.php');
+//include_once('models/PropertyGetter.php');
+//include_once('models/Property.php');
+
+/**
+ * Description of HouseList
+ *
+ * @author sashi
+ */
+class PropertyList extends Page
+{
+
+    //private $propertyDatabase;
+    private static $propertySearch = null;
+
+    public function __construct()
+    {
+        parent::__construct();
+        self::initPropertySearch();
+
+        /* justina, commented this out - appears to be superceded by pDB in Property.php
+          $this->propertyDatabase = new ModelDatabase(
+          new PropertyAdder("Property"),
+          new PropertyRemover("Property"),
+          new PropertyEditor("Property"),
+          new PropertyGetter("Property")
+          );
+         * 
+         */
+        ?>
+        <!DOCTYPE html>
+        
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Buy</title>
+
+                <!-- Bootstrap core CSS -->
+                <link href="css/bootstrap.css" rel="stylesheet">
+
+
+                <!-- Custom styles for this template -->
+                <link href="css/Header.css" rel="stylesheet">
+                <link href="css/PropertyList.css" rel="stylesheet">
+                <link href="css/Footer.css" rel="stylesheet">
+            </head>
+
+            <?php
+        }
+
+        public static function setSearchAddConstraint($constraint)
+        {
+            self::$propertySearch->addConstraint($constraint);
+        }
+
+        public static function setSearchClear()
+        {
+            self::$propertySearch->clear();
+        }
+
+        public static function setSearchRemoveMostRecentConstraint()
+        {
+            self::$propertySearch->deleteMostRecent();
+        }
+
+        public static function setSearchRestoreMostRecentConstraint()
+        {
+            self::$propertySearch->restoreMostRecent();
+        }
+
+        private static function initPropertySearch()
+        {
+            if (is_null(self::$propertySearch)) {
+                self::$propertySearch = new PropertySearch(null);
+            }
+        }
+
+        public function display()
+        {
+            $this->header->display();
+            $this->displayHouseList();
+            $this->footer->display();
+        }
+
+        public function displayHouseList()
+        {
+            /* test PropertyEditor...
+              self::setSearchAddConstraint( new PropertySearchConstraint('zip', '=', ['94123']));
+              $properties = Property::getBySearch(self::$propertySearch->sqlWhereClause());
+              $properties[0]->setShortDescription($properties[0]->getShortDescription()."  XYZ");
+              $properties[0]->save();
+             * 
+             */
+            /* test PropertyRemover...
+              self::setSearchAddConstraint(new PropertySearchConstraint('zip, '=', ['94110']));
+              $properties = Property::getBySearch(self::$propertySearch->sqlWhereClause());
+              $properties[0]->remove();
+             * 
+             */
+            /* test PropertyAdder...
+              $property = new Property();
+              $property->setIsNew(true);
+              $property->setAddress('800 Dolores St');
+              $property->setZip('94110');
+              $property->setCity('San Francisco');
+              $property->setState('CA');
+              $property->setLongDescription('Beautiful contemporary condo with '
+              . 'walk-in cloasets, master bath');
+              $property->setShortDescription('Beautiful contemporary condo');
+              $property->save();
+             * 
+             */
+            /* Test various search manipulations
+              self::setSearchAddConstraint(new PropertySearchConstraint('zip', '=', ['94123']));
+              echo "</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>";
+              self::setSearchAddConstraint(new PropertySearchConstraint('realtor_id', '=', ['1']));
+              //actually removes constraint due to empty value []
+              self::setSearchAddConstraint(new PropertySearchConstraint('zip', '=', []));
+              self::setSearchRestoreMostRecentConstraint();
+              self::setSearchAddConstraint(new PropertySearchConstraint('description_long', 'instr', ['victorian','lake']));
+              self::setSearchAddConstraint(new PropertySearchConstraint('zip', '=', ['94110','94123']));
+              self::setSearchClear();
+              self::setSearchAddConstraint(new PropertySearchConstraint('city', 'in', ['city101', 'Berkeley']));
+             * 
+             */
+            /* Test of Admin functionality
+              //add
+              $admin = new Admin(true);
+              $admin->setFirstName('Bruno');
+              $admin->setLastName('Anderson');
+              $admin->setPassword('csc648');
+              $admin->setEmail('bruno@sfsu.com');
+              $admin->setUsername('banderson');
+              $admin->save();
+              //remove
+              $admins = Admin::getBySearch("lastName='Anderson'");
+              $admins[0]->remove();
+              //edit
+              $admins = Admin::getBySearch("instr(email,'cotter')");
+              $admins[0]->setEmail('justinacotter@gmail.com');
+              $admins[0]->save();
+             * 
+             */
+            /* Test of Member functionality
+              //add
+              $member = new Member(true);
+              $member->setPassword('csc648');
+              $member->setEmail('scout@sfsu.com');
+              $member->setFirstName('Scout');
+              $member->setLastName('Cotter');
+              $member->setPhone('555-555-5555');
+              $member->save();
+              //remove
+              $members = Member::getBySearch("lastName='Cotter'");
+              $members[0]->remove();
+              //edit
+              $members = Member::getBySearch("instr(email,'cout')");
+              $members[0]->setGoogle(1);
+              $members[0]->setEnabled(0);
+              $members[0]->setWishlist('5,7');
+              $members[0]->setPhone('555-555-5555');
+              $members[0]->save();
+             * 
+             */
+            /* Test of Realtor functionality
+              //add
+              $realtor = new Realtor(true);
+              $realtor->setUsername('jcotte');
+              $realtor->setPassword('csc648');
+              $realtor->setEmail('justinacotter@gmail.com');
+              $realtor->setFirstName('Justina');
+              $realtor->setLastName('Cotter');
+              $realtor->setPhoneMobile('555-555-0000');
+              $realtor->setPhoneOffice('555-555-9999');
+              $realtor->setAbout('Grad student; team lead');
+              $realtor->setPicFilename('not available');
+              $realtor->save();
+              //remove
+              $realtors = Realtor::getBySearch("lastName='Cotter'");
+              $realtors[0]->remove();
+              //edit
+            //  $realtors = Realtor::getBySearch("instr(email,'cott')");
+             // $realtors[0]->setEnabled(0);
+              //$realtors[0]->setPhoneMobile('555-000-0000');
+              //$realtors[0]->save();
+             * 
+             */
+
+            echo"<p>PropertyList: displayHouseList() entry </p>";
+            $properties = null;
+            $properties = Property::getBySearch(self::$propertySearch->sqlWhereClause());
+
+            $num_results = 0;
+
+            if ($properties != null) {
+                $num_results = count($properties);
+            }
+            echo '<p>Num Results:' . $num_results . '</p>';
+            session_start();
+            ?>
+
+            
+
+
+                <div class="description">
+                    <h2>Property Search Listing</h2>
+
+                    <div class="container">
+
+                        <div class="row">
+
+                            <div class="col-md-4 lef">
+
+                                <div class="Searchoptions">
+                                    <form method="Post" action="propertyList.php">
+                                        <input type="text"  class="form-control lab1"
+                                               name="search" placeholder="Enter Zipcode">
+                                        <button type="submit" class="btn btn-primary save2">Search</button>
+                                    </form>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+
+
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4 mid">
+                                <button type="submit" class="btn btn-primary save2">Sorting Search Option</button>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+                
+                <div class="container-fluid HotProperty">
+                     
+                    <?php
+                    $c = 0;
+                    for ($i = 0; $i < $num_results; $i++) {
+                        ?>
+                        <?php
+                        if ($c % 4 == 0) {
+                            echo "<div class='row'> ";
+                           
+                        }
+                         $_SESSION['pr'.$i] = $properties[$i];
+                         //$_SESSION['index']=$i;
+                        ?>
+
+                    
+                        <div class="col-xs-2 col-md-2">
+                            <a href="propertyDetails.php?pid=<?php echo $properties[$i]->getID();?>" class="thumbnail">
+                                <?php echo '<img class="image1" src="' . $properties[$i]->getThumbnailFileName() . '" >'; ?>
+
+                                <div class="text1">
+                                    <textarea class="form-control  text1"></textarea>
+                                </div>
+
+                            </a>
+                        </div>
+                        
+
+
+
+
+
+                        <?php
+                        $c++;
+                        if ($c % 4 == 0) {
+                            echo"</div>";
+                        }
+                    }
+                    ?>
+
+
+
+
+
+
+
+                       
+                </div>
+
+
+
+
+
+
+            
+        
+        <?php
+    }
+
+}

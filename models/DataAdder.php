@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * This is an abstact class DataAdder that implements interface ModelAction.
+ * So, this class is an abstraction for providing the functionality of
+ * adding data to Model's Database.
+ * And any one interested in providing this functionlity for a Model should extend
+ * this abstract class.
+ * For example :-
+ *                class BookAdder extends DataAdder
+ *                {
+ *                  
+ *                  public function add($data, $db)
+ *                  {
+ *                      ...
+ *                  }
+ *                }
+ *   
+ * Description of DataAdder
+ *
+ * @author sashi
+ */
+abstract class DataAdder implements ModelAction
+{
+
+    /**
+     *  Name of the table where the query will be performed
+     */
+    protected $table;
+
+    /**
+     * Adds data to the database 
+     * $db must be the handle of the database.
+     * $data should be an associative array with the indexes
+     * corelating to the fields of the table of this Model's Database.
+     */
+    public abstract function add($data, $db);
+
+    /*
+     * buildSQLInsert simplifies the formation of mysql 'insert' statements 
+     * by using a data array to loop through the fields.
+     */
+
+    public static function buildSQLInsert($table, $data)
+    {
+        $queryFields = "";
+        $queryVals = "";
+        $count = 0;
+        foreach ($data as $key => $value) {
+            //do NOT insert id field
+            if ($key == 'id') {
+                continue;
+            }
+            //assemble field list
+            if ($count > 0) {
+                $queryFields = $queryFields . ",";
+            }
+            $queryFields = $queryFields . $key;
+
+            //assemble value list
+            if ($count > 0) {
+                $queryVals = $queryVals . ",";
+            }
+            $queryVals = $queryVals . "'" . $value . "'";
+            $count++;
+        }
+
+        return "insert into " . $table . " (" . $queryFields . ") values (" . $queryVals . ")";
+    }
+
+}

@@ -1,0 +1,11 @@
+<?php
+    require_once("SweetHomeAutoloader.php");
+
+    if(isset($_GET['pid']))
+    {
+        $propertyDetailsPage = new PropertyDetails($_GET['pid']);
+        $propertyDetailsPage->display();
+    
+    }
+
+?>

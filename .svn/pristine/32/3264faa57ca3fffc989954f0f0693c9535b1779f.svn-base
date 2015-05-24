@@ -1,0 +1,121 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of Realtors
+ *
+ * @author sashi
+ */
+class Realtors extends Page
+{
+    public function __construct()
+    {
+        parent::__construct();
+        ?>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Realtors</title
+            <link rel="icon" href="images/favicon.ico">>
+
+            <!-- Bootstrap core CSS -->
+           <link href="css/bootstrap.css" rel="stylesheet">
+
+
+           <!-- Custom styles for this template -->
+           <link href="css/Header.css" rel="stylesheet">
+            <link href="css/Realtors.css" rel="stylesheet">
+            <link href="css/Footer.css" rel="stylesheet">
+          </head>
+
+<?php
+
+    }
+
+    public function display()
+    {
+        $this->header->display();
+        $this->displayContent();
+        $this->footer->display();
+
+    }
+
+    public function displayContent()
+    {
+        ?>
+
+          <div class="RealtorListing">
+          <h2> Realtor Listing </h2>
+
+
+          <div class="row">
+
+                <div class="col-xs-4 col-md-2 realtorpic1">
+                    <a href="#" class="thumbnail thumb" style="border-color: white">
+                        <img src="images/properties_full/pic1.jpg" class="img-circle img-responsive img">
+                    <button type="submit" class="btn btn-link rate1">Review</button>
+                    </a>
+                </div>
+
+                <div class="col-xs-4 col-md-7 realtortext1">
+                    <a href="#" class="thumbnail" style="border-color: white">
+                    <textarea class="textarea1"></textarea>
+                    <button type="submit" class="btn btn-primary cont1">Review</button>
+                    <button type="submit" class="btn btn-primary rev1">Contact</button>
+
+                  </a>
+                </div>
+       </div>
+
+
+
+        <div class="row">
+
+                <div class="col-xs-4 col-md-2 realtorpic1">
+                    <a href="#" class="thumbnail thumb" style="border-color: white">
+                        <img src="images/properties_full/pic2.jpg" class="img-circle img-responsive img">
+                    <button type="submit" class="btn btn-link rate1">Review</button>
+                    </a>
+                </div>
+
+                <div class="col-xs-4 col-md-7 realtortext1">
+                    <a href="#" class="thumbnail" style="border-color: white">
+                    <textarea class="textarea1"></textarea>
+                    <button type="submit" class="btn btn-primary cont1">Review</button>
+                    <button type="submit" class="btn btn-primary rev1">Contact</button>
+
+                  </a>
+                </div>
+       </div>
+
+        <div class="row">
+
+                <div class="col-xs-4 col-md-2 realtorpic1">
+                    <a href="#" class="thumbnail thumb" style="border-color: white">
+                        <img src="images/properties_full/pic3.JPG" class="img-circle img-responsive img">
+                    <button type="submit" class="btn btn-link rate1">Review</button>
+                    </a>
+                </div>
+
+                <div class="col-xs-4 col-md-7 realtortext1">
+                    <a href="#" class="thumbnail" style="border-color: white">
+                    <textarea class="textarea1"></textarea>
+                    <button type="submit" class="btn btn-primary cont1">Review</button>
+                    <button type="submit" class="btn btn-primary rev1">Contact</button>
+
+                  </a>
+                </div>
+        </div>
+
+
+
+    </div>
+        <?php
+    }
+}

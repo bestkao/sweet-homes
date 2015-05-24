@@ -1,0 +1,84 @@
+<?php
+
+require_once("SweetHomeAutoloader.php");
+
+//need session to pass the search constraint object for pagination
+session_start();
+
+$FREEFORM = "/freeform";
+$FLD_OP_DELIM = "/";
+
+$limitPerPage = 5;
+//All records will be displayed if no search is selected
+//echo "origin is set to " . $_SESSION['origin'] . "</br>";
+//reset search if session status is unclear (no origin), or coming from Home page 
+if (isset($_SESSION['origin']) == false || $_SESSION['origin'] == "Home") {
+session_unset();
+//echo "Session unset</br>";
+}
+//create a new property list page with current search
+$propertyListPage = new PropertyList();
+
+//get user's search entry variable, if selected
+if (isset($_POST['searchFld']) == true) {
+    $searchFld = $_POST['searchFld'];
+    //echo "POST: searchFld = " . $searchFld . "</br>";
+} elseif (isset($_GET['searchFld']) == true) {
+    $searchFld = $_GET['searchFld'];
+    //echo "GET: searchFld = " . $searchFld . "</br>";
+} else {
+    //if no search field is selected, it is a freeform search
+    $searchFld = $FREEFORM;
+    //echo "No searchFld found, freeform.</br>";
+}
+
+//get user's search query, if entered/selected
+if (isset($_POST['searchData']) == true) {
+    $search = $_POST['searchData'];
+    $search = InputFilter::filter($search);
+    //echo "POST search";
+} elseif (isset($_GET['searchData']) == true) {
+    $search = $_GET['searchData'];
+    $search = InputFilter::filter($search);
+    //echo "GET search";
+} else {
+    //echo "No search criteria found.</br>";
+}
+
+//if new search request was found, process
+if (is_string($search)) {
+    //echo "search value = ".$search."</br>";
+    //need to retain and display user's freeform search entry
+    if ($searchFld == $FREEFORM) {
+        $_SESSION['freeform'] = $search;
+    }
+    //parse search field for field name and operator
+    $opDelim = strpos($searchFld, $FLD_OP_DELIM);
+    $operator = substr($searchFld, $opDelim + 1);
+    if ($opDelim) {
+        $searchFld = substr($searchFld, 0, strpos($searchFld, $FLD_OP_DELIM));
+    } else {
+        $searchFld = "";
+    }
+    //echo "search field = ".$searchFld.", operator = ".$operator."</br>";
+
+    //create new search constraint
+    $constraint = new PropertySearchConstraint($searchFld, $operator,
+                  $search);
+    $_SESSION['constraint'] = $constraint;
+    $propertyListPage->setSearchAddConstraint($constraint);
+    //echo "where clause = " . $constraint->sqlWhereClause() . "</br>";
+}
+
+//manage paging
+$pagination = new Pagination();
+$pagination->setLimit($limitPerPage);
+$propertyListPage->setLimit($limitPerPage);
+
+if (isset($_GET['index'])) {
+    $pagination->setStartIndex($_GET['index']);
+    $propertyListPage->setCurrentPage($_GET['index']);
+} else
+    $pagination->setStartIndex();
+
+$propertyListPage->display();

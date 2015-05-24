@@ -1,0 +1,241 @@
+
+
+#bg {
+  position: fixed; 
+
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+ //background-size: 100%;
+}
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+  background-position:center
+     
+}
+
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
+
+
+.jumbotron .container .caroText { 
+    color:black;
+    position:absolute;
+    z-index:1;
+    top:11%;
+    left:0;
+    width:100%;
+    text-align:center;
+    
+    
+}
+
+#first {
+    font-size:334%;
+}
+
+#second {
+    position: absolute;
+    top:43%;
+    padding-left: 29%;
+}
+.jumbotron .container .simple-search {
+    position:absolute;
+    top: 140%;
+    left: 58%;
+    width:100%;
+    //margin-left: -354px;
+    margin-left: -58%;
+    max-width: 100%;
+    background: 0;
+    border: 0;
+    margin-top: -150px;
+    
+   
+    
+}
+.jumbotron .container .searchbar1 .search-label {
+    position:absolute;
+    top:93%;
+    z-index:3;
+    max-width: none;
+    width:100%;
+
+
+}
+
+.jumbotron .container .searchbar1 .search-label .SearchBox {
+    position:absolute;
+    top:93%;
+    
+
+}
+
+.jumbotron .container .searchbar1 .ButtonSearch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color:brown;
+   
+    margin: 0;
+    width:20%;
+    height:33px;
+
+
+
+}
+
+.jumbotron .container .searchbar1 .SearchBox {
+    height: 33px;
+    width: 100%;
+
+}
+
+.jumbotron .container .tap {
+ 
+    margin-left: -103.3%;
+    position: absolute;
+    top:60%;
+}
+
+.jumbotron .container .tap .container .row .citybtn .CityButton{
+
+
+  width: 100%;
+  padding-top: 7px;
+
+   }
+   
+   .jumbotron .container .tap .container .row .neighbtn .neighButton {
+
+
+  width: 100%;
+  padding-top: 7px;
+
+  
+  
+   }
+      .jumbotron .container .tap .container .row .neighbtn {
+
+
+ margin-left: -3%;
+ 
+  
+  
+   }
+   
+ .jumbotron .container .tap .container .row .addbtn .AddButton {
+
+
+  width: 100%;
+  padding-top: 7px;
+  
+   }
+   
+    .jumbotron .container .tap .container .row .addbtn  {
+
+ margin-left: -3%;
+   }
+
+
+.jumbotron .container .tap .container .row .neighbour ul {
+
+  background-color: lightgray;
+  width: 223px;
+  margin-left:-64px;
+
+  
+   } 
+   
+.jumbotron .container .tap .container .row .neighbour a {
+
+  color:black;
+  margin-top:0px;
+
+  
+   } 
+   
+.jumbotron .container .tap .container .row .neighbour li {
+     padding-top: 0px;
+
+}
+   
+           
+             
+
+
+.jumbotron {
+    padding: 8.5em .6em;
+
+    z-index:3;
+    position: absolute;
+    top:34%;
+    padding-left: 50%;
+ 
+    width: 34px;
+   margin-left:25%;
+   -webkit-border-radius: 20px; 
+   -moz-border-radius: 20px; 
+   border-radius: 20px;
+  color:darkkhaki;
+   opacity: 0.8;
+   background: linear-gradient(
+	        cyan,
+		transparent
+	),	linear-gradient(
+	
+		#403075,
+		transparent
+	);
+   background-blend-mode: multiply;
+  
+   
+}
+
+
+
+.description {
+    position: absolute;
+    top:123%;
+    padding-left: 12%;
+
+}
+
+
+
+.description .row span {
+    padding-left: 25%;
+
+}
+
+
+.description .row .mid .glyphicon {
+    padding-left: 16%;
+
+}
+
+.description .row .rig .glyphicon {
+    padding-left: 19%;
+
+}
+.carousel {
+    position:absolute;
+    top:15%;
+    padding-bottom:2px;
+    
+}

@@ -1,0 +1,117 @@
+.ContactUs {
+    position: relative;
+    top:13px;
+    max-height: 434px;
+    padding-left:20%;
+}
+
+
+.newtable {
+    position: relative;
+    top:23px;
+    padding-left: 15%;
+}
+
+.newtable .table >tbody .im1 {
+    height: 125px;
+    width: 225px;
+}
+
+.newtable .table >tbody .txt1 {
+    height: 128px;
+    width: 425px;
+}
+
+
+.newtable .table >tbody .image1 {
+    height: 100%;
+    width: 100%;
+}
+
+.newtable .table >tbody .textarea1 {
+    height: 100%;
+    width: 100%;
+   
+   
+}
+
+.newtable .table >tbody .secondbutton {
+  position: relative;
+  top:33px;
+  padding-right: 32px;
+}
+
+
+
+@media(max-width:768px) {
+    
+   
+
+
+.ContactUs .form-horizontal h2 {
+        font-size: 21px;
+        padding-left: 7px;
+    }
+    
+   
+    .ContactUs {
+    position: relative;
+    top:13px;
+    padding-left:37px;
+}
+    .ContactUs .form-horizontal-main .form-group .form-control {
+        width: 76%;
+    }
+    
+    .ContactUs .form-horizontal-main .form-group .form-savesearch {
+        position: relative;
+        top:4px;
+        
+    }
+    
+    .newtable {
+        position: relative;
+        top:37px;
+        padding-left: 12px;
+    }
+    
+    
+    
+    
+
+.newtable .table >tbody .im1 {
+    height: 125px;
+    width: 225px;
+}
+
+.newtable .table >tbody .txt1 {
+    height: 128px;
+    width: 425px;
+}
+
+
+.newtable .table >tbody .image1 {
+    height: 100%;
+    width: 100%;
+}
+
+.newtable .table >tbody .textarea1 {
+    height: 100%;
+    width: 100%;
+   
+   
+}
+
+.newtable .table >tbody .secondbutton {
+  position: relative;
+  top:33px;
+  padding-right: 32px;
+}
+
+
+
+
+
+
+}
+

@@ -1,0 +1,212 @@
+<?php
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+class Home extends Page
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        ?>
+        <!DOCTYPE html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>SweetHomes</title>
+            <link rel="icon" href="images/favicon.ico">
+
+            <!-- Bootstrap core CSS -->
+            <link href="css/bootstrap.css" rel="stylesheet">
+
+            <!-- Custom styles for this template -->
+            <link href="css/Header.css" rel="stylesheet">
+            <link href="css/Home.css" rel="stylesheet">
+            <link href="css/Footer.css" rel="stylesheet">
+        </head>
+        <?php
+    }
+
+    public function display()
+    {
+
+        $this->header->display();
+        $this->displayContent();
+        // $this->footer->display(); // James is fixing this, 11/20 7:30pm
+    }
+
+    public function displayContent()
+    {
+        ?>
+                <!--<img src="images/properties_full/picture1.JPG" alt="">-->
+
+        <div class="searchbox">
+            <div class="container">
+
+
+
+
+
+                <div class="tap">
+                    <div class="container">
+
+                        <div class="row">
+
+
+                            <div class="col-xs-5 col-sm-4 col-md-3 col-lg-3 btn-group input-group-btn neitn">
+                                <select class="btn btn-default dropdown-toggle dropButt" name="searchFld" id="field" form="dropform">
+                                    <option value="city/instr">City</option>
+                                    <option value="price/<=">Price (max)</option>
+                                    <option value="bedrooms/>=">Bedrooms (min)</option>
+                                    <option value="zip/=">Zip</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="searchbar1 simple-search" >
+
+                    <form class="search" action="propertyList.php" method="post" id="dropform">
+
+                        <input class="form-control SearchBox" name="searchData" value="" placeholder="Search City, Price, Bedrooms, Zip">
+
+                        <button tabindex="2" class="ButtonSearch " type="submit" data-icon="search-go"> <span class="glyphicon glyphicon-search"></span></button>
+
+                    </form>
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="caroText">
+            <h1 id="first">SweetHomes</h1>
+            <h2 id="second">Discover a new place to live anywhere in the Bay. </h2>
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <div class="container-fluid HotProperty">
+            <h1> RECENTLY SOLD HOMES </h1>
+            <div class="row">
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src=" ">
+                        <img src="images/properties_full/picture2.JPG" alt=""/>
+
+                        <div class="text">
+                            <textarea class="form-te  text1">252 Cambridge St,
+    San Francisco, CA 94134</textarea>
+                        </div>
+
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src=" ">
+                        <img src="images/properties_full/picture3.JPG" alt=""/>
+                        <div class="text">
+                            <textarea class="form-te  text1">336 Lakeview Ave,
+    San Francisco, CA 94112</textarea>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src=" ">
+                        <img src="images/properties_full/picture1.JPG" alt=""/>
+                        <div class="text">
+                            <textarea class="form-te  text1">645 Haight St APT 17,
+    San Francisco, CA 94117</textarea>
+                        </div>
+                    </a>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="row">
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src=" ">
+                        <img src="images/properties_full/picture1.JPG" alt=""/>
+
+                        <div class="text">
+                            <textarea class="form-te  text1">1160 Mission St UNIT 1707,
+    San Francisco, CA 94103</textarea>
+                        </div>
+
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src=" ">
+                        <img src="images/properties_full/picture2.JPG" alt=""/>
+                        <div class="text">
+                            <textarea class="form-te  text1">260 King St UNIT 669,
+    San Francisco, CA 94107</textarea>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src=" ">
+                        <img src="images/properties_full/picture3.JPG" alt=""/>
+                        <div class="text">
+                            <textarea class="form-te  text1">666 Madrid St,
+    San Francisco, CA 94112</textarea>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/dropsearch.js" type="text/javascript"></script>
+    </body>
+    <?php
+    }
+}
+?>

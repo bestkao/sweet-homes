@@ -1,0 +1,7 @@
+<?php
+
+require_once("SweetHomeAutoloader.php");
+
+$aboutPage = new About();
+$aboutPage->display();
+

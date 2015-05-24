@@ -1,0 +1,137 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+class Home extends Page
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        ?>
+        <!DOCTYPE html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>SweetHomes</title>
+            <link rel="icon" href="images/favicon.ico">
+
+            <!-- Bootstrap core CSS -->
+            <link href="css/bootstrap.css" rel="stylesheet">
+
+            <!-- Custom styles for this template -->
+            <link href="css/Header.css" rel="stylesheet">
+            <link href="css/Home.css" rel="stylesheet">
+            <link href="css/Footer.css" rel="stylesheet">
+        </head>
+        <?php
+    }
+
+    public function display()
+    {
+
+        $this->header->display();
+        $this->displayContent();
+        $this->footer->display();
+    }
+
+    public function displayContent()
+    {
+        $_SESSION['origin'] = "Home";
+        ?>
+
+
+        <body>
+           <!--Text Heading -->
+            <div class="container caroText">
+            <h1 id="first">Sweet Homes</h1>
+            <h2 id="second">Discover a new place to live anywhere in the bay. </h2>
+            </div>
+
+
+            <!--Search Bar -->
+            <div class="container searchmiddle ">
+            <div class="row">
+            <div class="col-md-7 col-md-offset-3" style="position:relative;">
+            <form class="form-horizontal" action="propertyList.php" method="get" id="dropform">
+                <div class="form-group col-md-9">
+                    <input class="form-control SearchBox" name="searchData" placeholder="Enter City, Neighborhood, Zip">
+                    <input type="hidden" name="searchFld" value="<?php
+                       echo PropertyList::$SRCHFLD_FREEFORM_MAIN;
+                       ?>">
+                </div>
+                <span class="buttonSrh"><button class="btn btn-primary" type="submit">Search</button></span>
+            </form>
+            </div>
+            </div>
+            </div>
+
+
+
+            <!-- Sold Home Properties -->
+            <div class="container-fluid HotProperty">
+            <h1> RECENTLY SOLD HOMES </h1>
+                <div class="row">
+                <div class="col-md-10 col-md-offset-1" style="position:relative;">
+                <div class="col-md-4">
+                    <div  class="thumbnail">
+                    <img src="images/properties_full/picture1.JPG">
+                    <div class="text">
+                    <p>
+                    1160 Mission St UNIT 1707<br>
+                    San Francisco, CA 94103<br>
+                    Date Sold:11/2/2014<br>
+                    Price: $705,000<br>
+                    </p>
+                    </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                    <img src="images/properties_full/picture2.JPG">
+                        <div class="text">
+                        <p>
+                        260 King St UNIT 669<br>
+                        San Francisco, CA 94107<br>
+                        Date Sold:11/9/2014<br>
+                        Price: $805,000<br>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                    <img src="images/properties_full/picture3.JPG">
+                        <div class="text">
+                        <p>
+                        666 Madrid St<br>
+                        San Francisco, CA 94112<br>
+                        Date Sold:11/5/2014<br>
+                        Price: $905,000<br>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+            </div>
+            </div>
+
+
+
+        </body>
+        <?php
+    }
+
+}
+?>

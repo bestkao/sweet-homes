@@ -1,0 +1,358 @@
+<?php
+
+
+/**
+ * Description of Properties
+ *
+ * @author sashi
+ */
+class Properties extends Page
+{
+    
+    private $properties;
+    private $editProperty;
+    
+     public function __construct() {
+        parent::__construct();
+        ?>
+        <html>
+            <head>
+                <title>Properties</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+                <link rel="icon" href="images/favicon.ico">
+                <!-- Custom styles for this template -->
+                <link href="css/Header.css" rel="stylesheet">
+               <link href="css/Properties.css" rel="stylesheet">
+                <link href="css/Footer.css" rel="stylesheet">
+            </head>
+        <?php
+    }
+    
+    public function setProperties($prop) 
+    {
+        $this->properties= $prop;
+        
+    }
+    
+    public function setEditProperty($prop) 
+    {
+        $this->editProperty= $prop;
+    }
+
+    private function displayEditForm()
+    {?>
+                    <div class="jumbotron" style=" top:5%; left: 200px;"> 
+<form class="form-vertical" 
+      <?php echo "action='editProperties.php?id=".$this->editProperty->getId()."'";
+         
+              ?>
+      method="POST">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Edit Property</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  >Address</label>
+      <div class="controls">
+        <input type="text"  name="address" 
+               <?php echo 'placeholder="'.$this->editProperty->getAddress().'"';?>
+               class="input-xlarge">
+       
+      </div>
+    </div>
+     <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  >Address Unit</label>
+      <div class="controls">
+        <input type="text"  name="addressUnit" 
+               <?php echo 'placeholder="'.$this->editProperty->getAddressUnit().'"';?>
+               class="input-xlarge">
+        
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- E-mail -->
+      <label class="control-label" >City</label>
+      <div class="controls">
+        <input type="text"  name="city" 
+               <?php echo 'placeholder="'.$this->editProperty->getCity().'"';?>
+               class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" >Price</label>
+      <div class="controls">
+        <input type="text"  name="price" 
+               <?php echo 'placeholder="'.$this->editProperty->getPrice().'"';?>
+               class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+       <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" >Zip</label>
+      <div class="controls">
+        <input type="text"  name="zip" 
+               <?php echo 'placeholder="'.$this->editProperty->getZip().'"';?>
+               class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+          <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" >status</label>
+      <div class="controls">
+        <input type="text" name="status" 
+               <?php echo 'placeholder="'.$this->editProperty->getStatus().'"';?>
+               class="input-xlarge">
+        <p class="help-block"></p>
+      </div>
+    </div>
+ 
+
+ 
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <button class="btn btn-success">Edit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>   
+                    </div>        
+            <?php
+        
+    }
+    
+    public function displayAdd() 
+    {?>
+    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
+                                                <div class="media">
+
+                                                 
+
+
+                                                    <div class="clearfix visible-sm"></div>
+                                                    <div class="media-body fnt-smaller">
+                                                        <!--<a class="pull-left">
+                                                            <img alt="image"  class="img-responsive"  width="720" height="520">
+                                                        </a>
+                                                        <a href="#" target="_parent"></a>
+
+                                                        <h4 class="media-heading">
+                                                          Address-->
+          
+                                                                <small class="pull-right">
+                                            <p><a  class="btn btn-primary" role="button">Add Property</a> 
+                                                
+                                                                </small>
+                                                            </a></h4>
+
+
+                                                        <!--<p> Price
+            <?php
+            //echo '$' . $this->properties[$i]->getPrice();
+            ?>
+                                                        </p>
+                                                        <ul class="list-inline mrg-0 btm-mrg-10 clr-535353">
+
+                                                            <li>
+           
+                                                                Beds,</li>
+                                                            <li>
+            <?php //echo $this->properties[$i]->getBathrooms(); ?>
+                                                                Baths,</li>
+                                                            <li>
+            <?php //echo $this->properties[$i]->getSqft(); ?>
+                                                                SqFt</li>
+
+                                                        </ul>
+
+
+                                                        <p class="hidden-xs">
+            <?php //echo $this->properties[$i]->getShortDescription(); ?>
+                                                        </p>
+                                                        <span class="fnt-smaller fnt-lighter fnt-arial"></span>
+-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+            
+            <?php
+        
+    }
+    
+    public function displayContent()
+    {?>
+            <br/><br/><br/><br/><br/>
+            <div class="container-fluid navbar navbar-default " role="navigation">
+            
+             <ul class="nav navbar-nav list">   
+                 <li ><a id="listing" href="properties.php?list=1" 
+                       <?php if(!$this->editProperty instanceof Property)
+                           echo 'style="color:green;"';?>
+                         >Your Listing</a></li> 
+                         
+                   <?php
+                if($this->editProperty instanceof Property){
+                ?>
+                 <li><a>Edit</a> </li>
+                <?php
+                }
+                ?>       
+            </ul>
+               
+              </div>
+             <div class="container-fluid" style="background-color:white">
+                    <div class="container container-pad" id="property-listings">
+
+
+                              <div class="row">
+                               
+        <?php
+        if(!$this->editProperty instanceof Property){
+            
+        for($i=0; $i<count($this->properties); $i++){
+            if($i==0)$this->displayAdd();
+        ?>
+            
+
+                                            <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
+                                                <div class="media">
+
+                                                    <a class="pull-left"
+            <?php
+            echo 'href="propertyDetails.php?pid=' . $this->properties[$i]->getID() . '"';
+            ?>
+                                                       target="_parent">
+                                                        <img alt="image"  class="img-responsive"  <?php echo'src="' . $this->properties[$i]->getThumbnailFileName() . '"'; ?> width="720" height="520">
+                                                    </a>
+
+
+                                                    <div class="clearfix visible-sm"></div>
+                                                    <div class="media-body fnt-smaller">
+                                                        <a href="#" target="_parent"></a>
+
+                                                        <h4 class="media-heading">
+                                                            <a href="#" target="_parent">
+            <?php
+            echo $this->properties[$i]->getAddress();
+            ?>
+                                                                <small class="pull-right">
+                                            <p><a 
+                                                      <?php
+                echo 'href="properties.php?ed=' . $this->properties[$i]->getID() . '"';
+                 ?>
+                                                    class="btn btn-primary" role="button">Edit</a> 
+                                                <a href="#" class="btn btn-default" role="button">Delete</a></p>
+                                                                </small>
+                                                            </a></h4>
+
+
+                                                        <p>
+            <?php
+            echo '$' . $this->properties[$i]->getPrice();
+            ?>
+                                                        </p>
+                                                        <ul class="list-inline mrg-0 btm-mrg-10 clr-535353">
+
+                                                            <li>
+            <?php echo $this->properties[$i]->getBedrooms(); ?>
+                                                                Beds,</li>
+                                                            <li>
+            <?php echo $this->properties[$i]->getBathrooms(); ?>
+                                                                Baths,</li>
+                                                            <li>
+            <?php echo $this->properties[$i]->getSqft(); ?>
+                                                                SqFt</li>
+
+                                                        </ul>
+
+
+                                                        <p class="hidden-xs">
+            <?php echo $this->properties[$i]->getShortDescription(); ?>
+                                                        </p>
+                                                        <span class="fnt-smaller fnt-lighter fnt-arial"></span>
+
+                                                    </div>
+
+                                                </div>
+                                            </div><!-- End Listing-->
+            <?php
+        }
+        
+        }
+        else{
+            $this->displayEditform();
+        
+        }
+            ?>
+                                            </div>
+                        </div>
+                 </div>
+            
+           <!-- <div class="jumbotron">
+   
+    <form  id=add action="sell.php" method="post" enctype="multipart/form-data" >
+                        <table border=0>
+
+                            <tr>
+                                <td>Address</td>
+                                <td align=left><input type="text" name="address" size=30 maxlength=40></td>
+                            </tr>
+                            <tr>
+                                <td>Address Unit</td>
+                                <td align=left><input type="text" name="addressUnit" size=10 maxlength=10></td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td align=left><input type="text" name="city" size=15 maxlength=20></td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td ><input type="text" name="state" size=2 maxlength=2></td>
+                            </tr>
+                            <tr>
+                                <td>Zip</td>
+                                <td ><input type="text" name="zip" size=10 maxlength=8></td>
+                            </tr>
+                            <tr>
+                                <td>Description Short</td>
+                                <td ><input type="text" name="descriptionShort" size=40 maxlength=100></td>
+                            </tr>
+                            <tr>
+                                <td>Description Long</td>
+                                <td ><input type="text" name="descriptionLong" size="100"</td>
+                            </tr>
+                            <tr>
+                                <td>Select image to upload:
+                                    <input type="file" name="fileToUpload"  id="fileToUpload">
+                                   <input type="submit" value="Upload Image" name="submit"></td>
+                            </tr>
+                            <tr>
+                                <td colspan=2 ><input type=submit value="Add" name="Add"></td>
+                            </tr>
+                        </table>
+                    </form>        
+                </div>-->
+        <?php
+        
+            
+    }
+
+    public function display()
+    {
+      $this->header->display();
+      $this->displayContent();
+      //$this->footer->display()
+    }
+
+}

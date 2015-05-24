@@ -1,0 +1,18 @@
+
+
+#about {
+         font-style: oblique;
+    font-weight: bolder;
+    color: whitesmoke;
+}
+
+.about {
+    position: relative;
+    top:103px;
+    padding-left: 13%;
+}
+
+.about .messge1 .text1 {
+    width: 65%;
+    height: 145px;
+}

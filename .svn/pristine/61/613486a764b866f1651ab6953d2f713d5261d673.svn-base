@@ -1,0 +1,310 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+class Home extends Page
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sweet Home</title>
+    
+    <!-- Bootstrap core CSS -->
+   <link href="css/bootstrap.css" rel="stylesheet">
+   
+   
+   <!-- Custom styles for this template -->
+  <link href="css/Home.css" rel="stylesheet">
+  <link href="css/Header.css" rel="stylesheet">
+  <link href="css/Footer.css" rel="stylesheet"> 
+   
+  </head>
+<?php
+    }
+    
+    public function display() 
+    {
+      
+            $this->header->display();
+            $this->displayContent();
+            $this->footer->display();
+    }
+    
+    public function displayContent()
+    {
+        ?>
+          
+         
+         
+
+  
+            <!--<img src="images/properties_full/picture1.JPG" alt="">-->
+<div class="jumbotron">
+<div class="container">
+    
+    <div class="caroText">
+            <p id="first">Home Sweet Home</p>
+            <p id="second">Discover a new place to live </p>
+            <p id="third">From anywhere across the bay.</p>
+
+    </div> 
+    
+    
+    
+     <div class="tap">
+                   <div class="container">
+
+                <div class="row">
+
+ 
+
+<div class="col-xs-5 col-sm-4 col-md-3 col-lg-3 btn-group input-group-btn neitn">
+                      
+
+
+
+     <button type="button" class="btn btn-default dropdown-toggle dropButt" data-toggle="dropdown">
+       SELECT
+       <span class="caret"></span>
+     </button>
+     <ul class="dropdown-menu pull-left">
+                  <li><a href="#">Neighborhood</a></li>
+                  <li><a href="#">City</a></li>
+                  <li><a href="#">Address</a></li>
+
+                 <li><a href="#">Zipcode</a></li>
+     </ul>
+ 
+
+
+
+
+                    </div>
+
+                
+
+                </div>
+            </div>
+          </div>
+    
+    
+    
+    
+    
+    
+    
+    
+        <div class="searchbar1 simple-search" >
+            
+              
+<form class="search" action="propertyList.php" method="post">
+    
+                    <input class="form-control SearchBox" placeholder="Search City, Neighborhood, Address"> 
+                    
+                        <button tabindex="2" class="ButtonSearch " type="submit" data-icon="search-go"> <span class="glyphicon glyphicon-search"></span></button>
+
+</form>
+        
+        
+    </div>
+</div>
+
+       
+
+</div>
+
+
+
+
+
+
+
+<div class="container-fluid HotProperty">
+            <h1> RECENTLY SOLD HOMES </h1>
+            <div class="row">
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src="images/properties_full/picture1.JPG">
+
+                        <div class="text">
+                            <textarea class="form-te  text1">252 Cambridge St,
+San Francisco, CA 94134</textarea>
+                        </div>
+
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src="images/properties_full/picture1.JPG">
+                        <div class="text">
+                            <textarea class="form-te  text1">336 Lakeview Ave,
+San Francisco, CA 94112</textarea>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src="images/properties_full/picture1.JPG">
+                        <div class="text">
+                            <textarea class="form-te  text1">645 Haight St APT 17,
+San Francisco, CA 94117</textarea>
+                        </div>
+                    </a>
+                </div>
+
+             
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="row">
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src="images/properties_full/picture3.JPG">
+
+                        <div class="text">
+                            <textarea class="form-te  text1">1160 Mission St UNIT 1707,
+San Francisco, CA 94103</textarea>
+                        </div>
+
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src="images/properties_full/picture3.JPG">
+                        <div class="text">
+                            <textarea class="form-te  text1">260 King St UNIT 669,
+San Francisco, CA 94107</textarea>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xs-3 col-md-4">
+                    <a href="#" class="thumbnail">
+                        <img src="images/properties_full/picture1.JPG">
+                        <div class="text">
+                            <textarea class="form-te  text1">666 Madrid St,
+San Francisco, CA 94112</textarea>
+                        </div>
+                    </a>
+                </div>
+
+ 
+
+
+
+
+            </div>
+
+        </div>
+
+<div class="push"></div>
+
+         
+
+
+                <!-- Carousel  -->
+              <!--  <div id="myCarousel" class="carousel slide SliderPic" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+
+                        <div class="item active">
+                            <img src= "images/properties_full/picture1.JPG" alt="Responsive image" class = "img-responsive pic1">
+                        </div>
+
+                        <div class="item">
+                            <img src= "images/properties_full/picture2.JPG" alt="Responsive image" class = "img-responsive pic2">
+                        </div>
+
+                        <div class="item">
+                            <img src= "images/properties_full/picture3.JPG" alt="Responsive image" class = "img-responsive pic3">
+                        </div>
+
+                    </div>
+
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                </div>-->
+
+         
+<!--
+
+        <div class="about">
+            <p> HOW SWEETHOME WORKS </p>
+        </div>
+
+
+        <div class="description">
+
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-4 lef">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        <p>REGISTER WITH SWEETHOMES</p>
+
+
+
+
+                    </div>
+
+                    <div class="col-md-4 mid">
+                        <span class="glyphicon glyphicon-globe"></span>
+                        <p>BROWSE LISTINGS</p>
+
+
+
+
+                    </div>
+
+                    <div class="col-md-4 rig">
+                        <span class="glyphicon glyphicon-align-center"></span>
+                        <p>CONTACT THE REALTOR</p>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+-->
+
+</html>
+    <?php
+    }
+
+//put your code here
+}
